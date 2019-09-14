@@ -6,6 +6,10 @@ import './registerServiceWorker'
 // Axios
 import axios from 'axios'
 
+// Styles
+import '@/assets/scss/main.scss'
+import '@/assets/scss/tailwind.scss'
+
 axios.defaults.headers.get['Accepts'] = 'application/json'
 // Add AFAS token if we have it
 axios.interceptors.request.use((config) => {
