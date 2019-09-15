@@ -9,6 +9,8 @@ import axios from 'axios'
 // Styles
 import '@/assets/scss/main.scss'
 import '@/assets/scss/tailwind.scss'
+// Custom
+import './fontawesome.js'
 
 // Axios configuration
 axios.defaults.headers.get['Content-Type'] = 'application/json'

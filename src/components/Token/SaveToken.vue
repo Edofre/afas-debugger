@@ -72,6 +72,7 @@
             class="bg-afas-blue text-white font-bold py-2 px-4 ml-2 rounded focus:outline-none focus:shadow-outline"
           >
             Test connection
+            <font-awesome-icon v-if="testingConnection" class="font-awesome-icon" icon="spinner" spin/>
           </button>
 
           <button
@@ -112,6 +113,9 @@
     computed: {
       tokenSuccessfullyConnected() {
         return this.$store.getters.tokenSuccessfullyConnected
+      },
+      testingConnection() {
+        return this.$store.getters.testingConnection
       }
     },
     validations: {

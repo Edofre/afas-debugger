@@ -50,7 +50,7 @@ const mutations = {
   },
   [types.MUTATE_TOKEN_SUCCESSFULLY_CONNECTED]: (state, token) => {
     state.tokenSuccessfullyConnected = token
-  },
+  }
 }
 
 const actions = {
@@ -76,7 +76,7 @@ const actions = {
     axios
       .get(url, {
         headers: {
-          'Authorization': authorizationHeader,
+          'Authorization': authorizationHeader
         }
       })
       .then(res => {
