@@ -1,7 +1,7 @@
 <template>
   <div class="border m-6 rounded-lg bg-white mx-auto max-w-lg shadow-lg rounded-lg">
     <div class="sm:flex sm:items-center px-6 py-6">
-      <form class="w-full" @submit.prevent="save">
+      <form class="w-full" @submit.prevent="testConnection">
 
         <div class="flex flex-wrap mb-2">
           <div class="md:w-1/2 px-3 md:mb-0">
@@ -68,10 +68,22 @@
             :disabled="$v.$invalid"
             :class="{'opacity-50 cursor-not-allowed': $v.$invalid, 'hover:bg-blue-700': !$v.$invalid}"
             type="submit"
-            class="bg-blue-500 text-white font-bold py-2 px-4 ml-2 rounded focus:outline-none focus:shadow-outline"
+            class="bg-afas-blue text-white font-bold py-2 px-4 ml-2 rounded focus:outline-none focus:shadow-outline"
           >
-            Save
+            Test connection
           </button>
+
+          <button
+            v-if="tokenSuccessfullyConnected"
+            :disabled="$v.$invalid"
+            :class="{'opacity-50 cursor-not-allowed': $v.$invalid, 'hover:bg-blue-700': !$v.$invalid}"
+            @click="save"
+            class="bg-afas-blue text-white font-bold py-2 px-4 ml-2 rounded focus:outline-none focus:shadow-outline"
+          >
+            Save token
+          </button>
+
+
         </div>
       </form>
     </div>
@@ -80,7 +92,7 @@
 
 <script>
   import { minLength, required } from 'vuelidate/lib/validators'
-  import { SAVE_TOKEN_DETAILS } from '../store/types'
+  import { SAVE_TOKEN_DETAILS, TEST_CONNECTION } from '../../store/types'
 
   export default {
     name: 'Token',
@@ -94,6 +106,11 @@
           { id: 'acceptance', 'name': 'Acceptance' },
           { id: 'production', 'name': 'Production' }
         ]
+      }
+    },
+    computed: {
+      tokenSuccessfullyConnected() {
+        return this.$store.getters.tokenSuccessfullyConnected
       }
     },
     validations: {
@@ -118,6 +135,15 @@
         }
 
         this.$store.dispatch(SAVE_TOKEN_DETAILS, tokenDetails)
+      },
+      testConnection() {
+        const tokenDetails = {
+          id: this.id,
+          environment: this.environment,
+          token: this.token
+        }
+
+        this.$store.dispatch(TEST_CONNECTION, tokenDetails)
       }
     }
   }

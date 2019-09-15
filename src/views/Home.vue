@@ -1,16 +1,20 @@
 <template>
   <div class="home">
-    <app-token></app-token>
+<!--    <app-load-token></app-load-token>-->
+
+    <app-save-token></app-save-token>
   </div>
 </template>
 
 <script>
-  import Token from '@/components/Token.vue'
+  import LoadToken from '@/components/Token/LoadToken.vue'
+  import SaveToken from '@/components/Token/SaveToken.vue'
 
   export default {
     name: 'home',
     components: {
-      'app-token': Token
+      'app-load-token': LoadToken,
+      'app-save-token': SaveToken
     }
   }
 </script>
