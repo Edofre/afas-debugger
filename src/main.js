@@ -11,8 +11,8 @@ import '@/assets/scss/main.scss'
 import '@/assets/scss/tailwind.scss'
 
 // Axios configuration
-// axios.defaults.headers.get['Accepts'] = 'application/json'
-// // Add AFAS token if we have it
+axios.defaults.headers.get['Content-Type'] = 'application/json'
+// Add AFAS token if we have it
 // axios.interceptors.request.use((config) => {
 //   const token = localStorage.getItem('token')
 //   if (token) {

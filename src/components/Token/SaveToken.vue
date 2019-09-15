@@ -53,6 +53,7 @@
               :class="{'border-red-500': $v.token.$error, 'border-green-500': !$v.token.$error && $v.token.$dirty}"
               @blur="$v.token.$touch()"
               class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white"
+              rows="4"
               id="token"
               placeholder="Your AFAS token"
             ></textarea>

@@ -22,9 +22,7 @@
     },
     methods: {
       load() {
-
         console.log('ww')
-
         // this.$store.dispatch(SAVE_TOKEN_DETAILS, tokenDetails)
       }
     }

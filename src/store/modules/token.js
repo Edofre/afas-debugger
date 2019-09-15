@@ -69,20 +69,19 @@ const actions = {
     commit(types.MUTATE_TOKEN_SUCCESSFULLY_CONNECTED, false)
 
     const token = btoa(tokenDetails.token)
-    console.log(token)
-    const header = `Authorization: AfasToken ${token}`
-    console.log(header)
+    const authorizationHeader = `AfasToken ${token}`
+    // TODO, test/acceptance
     const url = `https://${tokenDetails.id}.resttest.afas.online/profitrestservices/metainfo`
-    console.log(url)
 
     axios
-      .get(url, { headers: { header } })
+      .get(url, {
+        headers: {
+          'Authorization': authorizationHeader,
+        }
+      })
       .then(res => {
-
         console.log(res.data)
-
         commit(types.MUTATE_TOKEN_SUCCESSFULLY_CONNECTED, true)
-
       })
       .catch(error => {
         console.log(error) // TODO
