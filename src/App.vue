@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <nav class="flex items-center justify-between flex-wrap bg-afas-red p-6">
+    <nav class="flex items-center justify-between flex-wrap bg-afas-red border-b-2 p-4">
       <div class="flex items-center flex-no-shrink text-white mr-6">
         <span class="font-semibold text-xl tracking-tight">AFAS debugger</span>
       </div>

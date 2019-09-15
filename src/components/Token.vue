@@ -80,6 +80,7 @@
 
 <script>
   import { minLength, required } from 'vuelidate/lib/validators'
+  import { SAVE_TOKEN_DETAILS } from '../store/types'
 
   export default {
     name: 'Token',
@@ -110,9 +111,13 @@
     },
     methods: {
       save() {
-        console.log(this.id)
-        console.log(this.environment)
-        console.log(this.token)
+        const tokenDetails = {
+          id: this.id,
+          environment: this.environment,
+          token: this.token
+        }
+
+        this.$store.dispatch(SAVE_TOKEN_DETAILS, tokenDetails)
       }
     }
   }
