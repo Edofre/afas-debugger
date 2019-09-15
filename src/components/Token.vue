@@ -1,76 +1,89 @@
 <template>
-    <div class="border m-6 rounded-lg bg-white mx-auto max-w-lg shadow-lg rounded-lg">
-        <div class="sm:flex sm:items-center px-6 py-4">
-            <form @submit.prevent="save">
-                <div class="flex flex-wrap mb-6">
-                    <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                        <label
-                                class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                                for="grid-first-name"
-                        >
-                            AFAS ID
-                        </label>
-                        <input
-                                v-model="id"
-                                class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                                id="grid-first-name"
-                                type="text"
-                                placeholder="Jane"
-                        >
-                    </div>
-                    <div class="w-full md:w-1/2 px-3">
-                        <label class="block uppercase tracking-wide text-xs font-bold">
-                            <span class="text-gray-700">Environment</span>
-                            <select
-                                    v-model="environment"
-                                    class="form-select mt-2 appearance-none block w-full bg-gray-200 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                            >
-                                <option v-for="envOption in envOptions" :value="envOption.id">{{ envOption.name }}</option>
-                            </select>
-                        </label>
-                    </div>
+  <div class="border m-6 rounded-lg bg-white mx-auto max-w-lg shadow-lg rounded-lg">
+    <div class="sm:flex sm:items-center px-6 py-6">
+      <form class="w-full" @submit.prevent="save">
 
-                    <div class="w-full px-3">
-                        <p class="text-red-500 text-xs italic">We need your AFAS ID to determine what URL we can send requests to.</p>
-                    </div>
-                </div>
+        <div class="flex flex-wrap mb-2">
+          <div class="md:w-1/2 px-3 md:mb-0">
+            <label
+              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+              for="id"
+            >
+              AFAS ID
+            </label>
+            <input
+              v-model="id"
+              :class="{'border-red-500': $v.id.$error, 'border-green-500': !$v.id.$error && $v.id.$dirty}"
+              @blur="$v.id.$touch()"
+              class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white"
+              id="id"
+              type="text"
+              placeholder="123456"
+            >
+          </div>
+          <div class="md:w-1/2 px-3">
+            <label class="block uppercase tracking-wide text-xs font-bold">
+              <span class="text-gray-700">Environment</span>
+              <select
+                v-model="environment"
+                :class="{'border-red-500': $v.environment.$error, 'border-green-500': !$v.environment.$error}"
+                @blur="$v.environment.$touch()"
+                class="form-select mt-2 appearance-none block w-full bg-gray-200 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white"
+              >
+                <option v-for="envOption in envOptions" :key="envOption.id" :value="envOption.id">{{ envOption.name }}</option>
+              </select>
+            </label>
+          </div>
 
-                <div class="flex flex-wrap mb-6">
-                    <div class="w-full px-3 mb-6 md:mb-0">
-                        <label
-                                class="block resize-y uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                                for="token"
-                        >
-                            Token
-                        </label>
-                        <textarea
-                                v-model="token"
-                                class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                                id="token"
-                                placeholder="Your AFAS token"
-                        ></textarea>
-                        <p class="text-red-500 text-xs italic">Please enter your token.</p>
-                    </div>
-                </div>
-
-
-                <div class="flex items-center justify-between">
-                    <button
-                            type="submit"
-                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                    >
-                        Save
-                    </button>
-                </div>
-            </form>
+          <div v-if="$v.id.$error" class="w-full px-3">
+            <p class="text-red-500 text-xs italic">We need your AFAS ID to determine what URL we can send requests to.</p>
+          </div>
         </div>
+
+        <div class="flex flex-wrap mt-3">
+          <div class="w-full px-3 md:mb-0">
+            <label
+              class="block resize-y uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+              for="token"
+            >
+              Token
+            </label>
+            <textarea
+              v-model="token"
+              :class="{'border-red-500': $v.token.$error, 'border-green-500': !$v.token.$error && $v.token.$dirty}"
+              @blur="$v.token.$touch()"
+              class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white"
+              id="token"
+              placeholder="Your AFAS token"
+            ></textarea>
+          </div>
+
+          <div v-if="$v.token.$error" class="w-full px-3">
+            <p class="text-red-500 text-xs italic">Please enter your token.</p>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap mt-3">
+          <button
+            :disabled="$v.$invalid"
+            :class="{'opacity-50 cursor-not-allowed': $v.$invalid, 'hover:bg-blue-700': !$v.$invalid}"
+            type="submit"
+            class="bg-blue-500 text-white font-bold py-2 px-4 ml-2 rounded focus:outline-none focus:shadow-outline"
+          >
+            Save
+          </button>
+        </div>
+      </form>
     </div>
+  </div>
 </template>
 
 <script>
+  import { minLength, required } from 'vuelidate/lib/validators'
+
   export default {
     name: 'Token',
-    data () {
+    data() {
       return {
         id: null,
         environment: 'test',
@@ -82,9 +95,24 @@
         ]
       }
     },
+    validations: {
+      id: {
+        required,
+        minLen: minLength(3)
+      },
+      environment: {
+        required
+      },
+      token: {
+        required,
+        minLen: minLength(3)
+      }
+    },
     methods: {
-      save () {
+      save() {
         console.log(this.id)
+        console.log(this.environment)
+        console.log(this.token)
       }
     }
   }

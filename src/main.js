@@ -3,13 +3,14 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import './registerServiceWorker'
-// Axios
+// Packages
+import Vuelidate from 'vuelidate'
 import axios from 'axios'
-
 // Styles
 import '@/assets/scss/main.scss'
 import '@/assets/scss/tailwind.scss'
 
+// Axios configuration
 axios.defaults.headers.get['Accepts'] = 'application/json'
 // Add AFAS token if we have it
 axios.interceptors.request.use((config) => {
@@ -20,6 +21,10 @@ axios.interceptors.request.use((config) => {
   return config
 })
 
+// Vuelidate
+Vue.use(Vuelidate)
+
+// Vue CLI
 Vue.config.productionTip = false
 
 new Vue({

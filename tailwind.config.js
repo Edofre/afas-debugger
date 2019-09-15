@@ -3,7 +3,7 @@ module.exports = {
     extend: {
       colors: {
         'afas-blue': '#0c61a9',
-        'afas-red': '#cc0e3c',
+        'afas-red': '#cc0e3c'
       }
     }
   },
