@@ -2,7 +2,6 @@
   <div class="border m-6 rounded-lg bg-white mx-auto max-w-lg shadow-lg rounded-lg">
     <div class="sm:flex sm:items-center px-6 py-6">
       <form class="w-full" @submit.prevent="testConnection">
-
         <div class="flex flex-wrap mb-2">
           <div class="md:w-1/2 px-3 md:mb-0">
             <label

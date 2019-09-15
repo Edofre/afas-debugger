@@ -1,7 +1,6 @@
 <template>
   <div class="home">
-<!--    <app-load-token></app-load-token>-->
-
+    <!--    <app-load-token></app-load-token>-->
     <app-save-token></app-save-token>
   </div>
 </template>
