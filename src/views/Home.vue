@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <!--    <app-load-token></app-load-token>-->
+    <app-load-token v-if="tokenDetails" :tokenDetails="tokenDetails"></app-load-token>
     <app-save-token></app-save-token>
   </div>
 </template>
@@ -14,6 +14,11 @@
     components: {
       'app-load-token': LoadToken,
       'app-save-token': SaveToken
+    },
+    computed: {
+      tokenDetails() {
+        return localStorage.getItem('tokenDetails') ? JSON.parse(localStorage.getItem('tokenDetails')) : false
+      }
     }
   }
 </script>
