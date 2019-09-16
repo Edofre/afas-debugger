@@ -1,12 +1,14 @@
 import * as types from '../types'
 import axios from 'axios'
 
+let initialTokenDetails = {
+  id: null,
+  environment: 'test',
+  token: null
+}
+
 const state = {
-  tokenDetails: {
-    id: null,
-    environment: 'test',
-    token: null
-  },
+  tokenDetails: initialTokenDetails,
   testingConnection: false,
   tokenSuccessfullyConnected: false
 }
@@ -54,11 +56,12 @@ const mutations = {
 }
 
 const actions = {
-  [types.LOAD_TOKEN_DETAILS]: ({ commit }) => {
-    let tokenDetails = JSON.parse(localStorage.getItem('tokenDetails'))
-    console.log(tokenDetails)
-
-    commit(types.MUTATE_TOKEN_DETAILS, tokenDetails)
+  [types.LOAD_TOKEN_DETAILS]: ({ commit }, tokenDetails ) => {
+    commit(types.MUTATE_TOKEN_DETAILS, JSON.parse(tokenDetails))
+  },
+  [types.CLEAR_TOKEN_DETAILS]: ({ commit }, tokenDetails) => {
+    localStorage.removeItem('tokenDetails')
+    commit(types.MUTATE_TOKEN_DETAILS, initialTokenDetails)
   },
   [types.SAVE_TOKEN_DETAILS]: ({ commit }, tokenDetails) => {
     commit(types.MUTATE_TOKEN_DETAILS, tokenDetails)

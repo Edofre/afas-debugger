@@ -36,6 +36,8 @@
 </template>
 
 <script>
+  import { LOAD_TOKEN_DETAILS } from './store/types'
+
   export default {
     name: 'app',
     data() {
@@ -46,6 +48,12 @@
     methods: {
       toggle() {
         this.open = !this.open
+      }
+    },
+    created() {
+      let tokenDetails = localStorage.getItem('tokenDetails')
+      if (tokenDetails) {
+        this.$store.dispatch(LOAD_TOKEN_DETAILS, tokenDetails)
       }
     }
   }

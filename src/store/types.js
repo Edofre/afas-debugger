@@ -24,3 +24,4 @@ export const MUTATE_TOKEN_SUCCESSFULLY_CONNECTED = 'afas-debugger/MUTATE_TOKEN_S
 export const LOAD_TOKEN_DETAILS = 'afas-debugger/LOAD_TOKEN_DETAILS'
 export const SAVE_TOKEN_DETAILS = 'afas-debugger/SAVE_TOKEN_DETAILS'
 export const TEST_CONNECTION = 'afas-debugger/TEST_CONNECTION'
+export const CLEAR_TOKEN_DETAILS = 'afas-debugger/CLEAR_TOKEN_DETAILS'

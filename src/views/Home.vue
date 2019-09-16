@@ -1,24 +1,20 @@
 <template>
   <div class="home">
-    <app-load-token v-if="tokenDetails" :tokenDetails="tokenDetails"></app-load-token>
+    <app-token-details></app-token-details>
+
     <app-save-token></app-save-token>
   </div>
 </template>
 
 <script>
-  import LoadToken from '@/components/Token/LoadToken.vue'
+  import TokenDetails from '@/components/Token/TokenDetails.vue'
   import SaveToken from '@/components/Token/SaveToken.vue'
 
   export default {
     name: 'home',
     components: {
-      'app-load-token': LoadToken,
+      'app-token-details': TokenDetails,
       'app-save-token': SaveToken
-    },
-    computed: {
-      tokenDetails() {
-        return localStorage.getItem('tokenDetails') ? JSON.parse(localStorage.getItem('tokenDetails')) : false
-      }
     }
   }
 </script>
