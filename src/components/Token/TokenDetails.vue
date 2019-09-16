@@ -12,7 +12,6 @@
 </template>
 
 <script>
-
   import { CLEAR_TOKEN_DETAILS } from '../../store/types'
 
   export default {

@@ -36,7 +36,7 @@ const getters = {
 
 const mutations = {
   [types.MUTATE_TOKEN_DETAILS]: (state, tokenDetails) => {
-    state.tokenDetails.tokenDetails = tokenDetails
+    state.tokenDetails = tokenDetails
   },
   [types.MUTATE_AFAS_ID]: (state, id) => {
     state.tokenDetails.id = id
@@ -56,7 +56,7 @@ const mutations = {
 }
 
 const actions = {
-  [types.LOAD_TOKEN_DETAILS]: ({ commit }, tokenDetails ) => {
+  [types.LOAD_TOKEN_DETAILS]: ({ commit }, tokenDetails) => {
     commit(types.MUTATE_TOKEN_DETAILS, JSON.parse(tokenDetails))
   },
   [types.CLEAR_TOKEN_DETAILS]: ({ commit }, tokenDetails) => {
