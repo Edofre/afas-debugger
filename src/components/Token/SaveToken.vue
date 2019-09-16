@@ -66,7 +66,7 @@
         <div class="flex flex-wrap mt-3">
           <button
             :disabled="$v.$invalid"
-            :class="{'opacity-50 cursor-not-allowed': $v.$invalid, 'hover:bg-blue-700': !$v.$invalid}"
+            :class="{'opacity-50 cursor-not-allowed': $v.$invalid, 'hover:bg-afas-red': !$v.$invalid}"
             type="submit"
             class="bg-afas-blue text-white font-bold py-2 px-4 ml-2 rounded focus:outline-none focus:shadow-outline"
           >
@@ -77,7 +77,7 @@
           <button
             v-if="tokenSuccessfullyConnected"
             :disabled="$v.$invalid"
-            :class="{'opacity-50 cursor-not-allowed': $v.$invalid, 'hover:bg-blue-700': !$v.$invalid}"
+            :class="{'opacity-50 cursor-not-allowed': $v.$invalid, 'hover:bg-afas-red': !$v.$invalid}"
             @click="save"
             class="bg-afas-blue text-white font-bold py-2 px-4 ml-2 rounded focus:outline-none focus:shadow-outline"
           >
