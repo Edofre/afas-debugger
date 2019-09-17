@@ -1,5 +1,5 @@
 <template>
-  <div v-if="tokenDetails.id">
+  <div v-if="tokenDetails" class="sm:flex sm:items-center px-6 py-6">
     <div class="md:w-1/3 px-3 md:mb-0">
       <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold">
         ID
@@ -27,7 +27,7 @@
   import { CLEAR_TOKEN_DETAILS } from '../../store/types'
 
   export default {
-    name: 'LoadToken',
+    name: 'TokenDetails',
     data() {
       return {}
     },

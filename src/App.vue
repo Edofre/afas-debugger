@@ -36,6 +36,9 @@
             About
           </router-link>
         </div>
+        <div v-if="tokenDetails">
+          <app-current-token></app-current-token>
+        </div>
       </div>
     </nav>
 
@@ -50,23 +53,32 @@
 <script>
   import { LOAD_TOKEN_DETAILS } from './store/types'
 
+  import CurrentToken from '@/components/Token/CurrentToken.vue'
+
   export default {
     name: 'app',
     data() {
       return {
-        open: false,
-        tokenDetails: null
+        open: false
       }
+    },
+    components: {
+      'app-current-token': CurrentToken
     },
     methods: {
       toggle() {
         this.open = !this.open
       }
     },
+    computed: {
+      tokenDetails() {
+        return this.$store.getters.tokenDetails
+      }
+    },
     created() {
-      this.tokenDetails = localStorage.getItem('tokenDetails')
-      if (this.tokenDetails) {
-        this.$store.dispatch(LOAD_TOKEN_DETAILS, this.tokenDetails)
+      let tokenDetails = localStorage.getItem('tokenDetails')
+      if (tokenDetails) {
+        this.$store.dispatch(LOAD_TOKEN_DETAILS, tokenDetails)
       }
     }
   }

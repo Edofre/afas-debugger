@@ -1,19 +1,10 @@
 <template>
   <div class="home">
+    <div class="border m-6 rounded-lg bg-white mx-auto max-w-sm shadow-lg rounded-lg">
+      <app-token-details></app-token-details>
 
-    <div class="flex mt-4">
-      <div class="w-1/2 border m-6 rounded-lg bg-white mx-auto max-w-lg shadow-lg rounded-lg">
-        <div class="sm:flex sm:items-center px-6 py-6">
-          <app-token-details></app-token-details>
-        </div>
-      </div>
-      <div class="w-1/2 border m-6 rounded-lg bg-white mx-auto max-w-lg shadow-lg rounded-lg">
-        <div class="sm:flex sm:items-center px-6 py-6">
-          <app-save-token></app-save-token>
-        </div>
-      </div>
+      <app-save-token></app-save-token>
     </div>
-
   </div>
 </template>
 

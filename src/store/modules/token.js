@@ -1,14 +1,8 @@
 import * as types from '../types'
 import axios from 'axios'
 
-let initialTokenDetails = {
-  id: null,
-  environment: 'test',
-  token: null
-}
-
 const state = {
-  tokenDetails: initialTokenDetails,
+  tokenDetails: null,
   testingConnection: false,
   tokenSuccessfullyConnected: false
 }
@@ -16,15 +10,6 @@ const state = {
 const getters = {
   tokenDetails: (state) => {
     return state.tokenDetails
-  },
-  id: (state) => {
-    return state.tokenDetails.id
-  },
-  environment: (state) => {
-    return state.tokenDetails.environment
-  },
-  token: (state) => {
-    return state.tokenDetails.token
   },
   testingConnection: (state) => {
     return state.testingConnection
@@ -37,15 +22,6 @@ const getters = {
 const mutations = {
   [types.MUTATE_TOKEN_DETAILS]: (state, tokenDetails) => {
     state.tokenDetails = tokenDetails
-  },
-  [types.MUTATE_AFAS_ID]: (state, id) => {
-    state.tokenDetails.id = id
-  },
-  [types.MUTATE_ENVIRONMENT]: (state, environment) => {
-    state.tokenDetails.environment = environment
-  },
-  [types.MUTATE_TOKEN]: (state, token) => {
-    state.tokenDetails.token = token
   },
   [types.MUTATE_TESTING_CONNECTION]: (state, token) => {
     state.testingConnection = token
@@ -61,7 +37,7 @@ const actions = {
   },
   [types.CLEAR_TOKEN_DETAILS]: ({ commit }, tokenDetails) => {
     localStorage.removeItem('tokenDetails')
-    commit(types.MUTATE_TOKEN_DETAILS, initialTokenDetails)
+    commit(types.MUTATE_TOKEN_DETAILS, null)
   },
   [types.SAVE_TOKEN_DETAILS]: ({ commit }, tokenDetails) => {
     commit(types.MUTATE_TOKEN_DETAILS, tokenDetails)
