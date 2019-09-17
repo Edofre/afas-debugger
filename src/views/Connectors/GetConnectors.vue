@@ -1,15 +1,15 @@
 <template>
-  <div class="home">
+  <div class="get-connectors">
 
     <div class="flex mt-4">
       <div class="w-1/2 border m-6 rounded-lg bg-white mx-auto max-w-lg shadow-lg rounded-lg">
         <div class="sm:flex sm:items-center px-6 py-6">
-          <app-token-details></app-token-details>
+
         </div>
       </div>
       <div class="w-1/2 border m-6 rounded-lg bg-white mx-auto max-w-lg shadow-lg rounded-lg">
         <div class="sm:flex sm:items-center px-6 py-6">
-          <app-save-token></app-save-token>
+
         </div>
       </div>
     </div>
@@ -18,14 +18,9 @@
 </template>
 
 <script>
-  import TokenDetails from '@/components/Token/TokenDetails.vue'
-  import SaveToken from '@/components/Token/SaveToken.vue'
 
   export default {
-    name: 'home',
-    components: {
-      'app-token-details': TokenDetails,
-      'app-save-token': SaveToken
-    }
+    name: 'getConnectors',
+    components: {}
   }
 </script>

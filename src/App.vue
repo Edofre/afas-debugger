@@ -18,6 +18,18 @@
             to="/">
             Home
           </router-link>
+          <template v-if="tokenDetails">
+            <router-link
+              class="no-underline block mt-4 sm:inline-block sm:mt-0 hover:text-white mr-4"
+              to="/get-connectors">
+              GetConnectors
+            </router-link>
+            <router-link
+              class="no-underline block mt-4 sm:inline-block sm:mt-0 hover:text-white mr-4"
+              to="/update-connectors">
+              UpdateConnectors
+            </router-link>
+          </template>
           <router-link
             class="no-underline block mt-4 sm:inline-block sm:mt-0 hover:text-white"
             to="/about">
@@ -42,7 +54,8 @@
     name: 'app',
     data() {
       return {
-        open: false
+        open: false,
+        tokenDetails: null
       }
     },
     methods: {
@@ -51,9 +64,9 @@
       }
     },
     created() {
-      let tokenDetails = localStorage.getItem('tokenDetails')
-      if (tokenDetails) {
-        this.$store.dispatch(LOAD_TOKEN_DETAILS, tokenDetails)
+      this.tokenDetails = localStorage.getItem('tokenDetails')
+      if (this.tokenDetails) {
+        this.$store.dispatch(LOAD_TOKEN_DETAILS, this.tokenDetails)
       }
     }
   }
