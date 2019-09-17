@@ -1,7 +1,7 @@
 <template>
-  <div class="md:w-1/3 px-3 md:mb-0">
-    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold">
-      Current
+  <div class="text-xs">
+    <label class="uppercase text-gray-700 font-bold">
+      Current token:
     </label>
     {{ tokenDetails.id }}
   </div>

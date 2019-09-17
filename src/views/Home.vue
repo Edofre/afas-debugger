@@ -1,9 +1,9 @@
 <template>
   <div class="home">
-    <div class="border m-6 rounded-lg bg-white mx-auto max-w-sm shadow-lg rounded-lg">
-      <app-token-details></app-token-details>
+    <div class="border m-6 rounded-lg bg-white max-w-lg mx-auto shadow-lg rounded-lg">
+      <app-token-details v-if="tokenDetails"></app-token-details>
+      <app-save-token v-else></app-save-token>
 
-      <app-save-token></app-save-token>
     </div>
   </div>
 </template>
@@ -17,6 +17,11 @@
     components: {
       'app-token-details': TokenDetails,
       'app-save-token': SaveToken
+    },
+    computed: {
+      tokenDetails() {
+        return this.$store.getters.tokenDetails
+      }
     }
   }
 </script>

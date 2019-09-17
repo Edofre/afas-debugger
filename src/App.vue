@@ -42,11 +42,9 @@
       </div>
     </nav>
 
-    <div>
-      <transition name="slide" mode="out-in">
-        <router-view/>
-      </transition>
-    </div>
+    <transition name="slide" mode="out-in">
+      <router-view/>
+    </transition>
   </div>
 </template>
 
