@@ -18,7 +18,7 @@
             to="/">
             Home
           </router-link>
-          <template v-if="tokenDetails">
+          <template v-if="token">
             <router-link
               class="no-underline block mt-4 sm:inline-block sm:mt-0 hover:text-white mr-4"
               to="/get-connectors">
@@ -36,7 +36,7 @@
             About
           </router-link>
         </div>
-        <div v-if="tokenDetails">
+        <div v-if="token">
           <app-current-token></app-current-token>
         </div>
       </div>
@@ -49,7 +49,7 @@
 </template>
 
 <script>
-  import { LOAD_TOKEN_DETAILS } from './store/types'
+  import { LOAD_TOKEN } from './store/types'
 
   import CurrentToken from '@/components/Token/CurrentToken.vue'
 
@@ -69,14 +69,14 @@
       }
     },
     computed: {
-      tokenDetails() {
-        return this.$store.getters.tokenDetails
+      token() {
+        return this.$store.getters.token
       }
     },
     created() {
-      let tokenDetails = localStorage.getItem('tokenDetails')
-      if (tokenDetails) {
-        this.$store.dispatch(LOAD_TOKEN_DETAILS, tokenDetails)
+      let token = localStorage.getItem('afas_token')
+      if (token) {
+        this.$store.dispatch(LOAD_TOKEN, token)
       }
     }
   }

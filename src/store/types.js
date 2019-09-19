@@ -13,12 +13,14 @@ export const STATUS_FINISHED = 2
 |--------------------------------------------------------------------------
 */
 // Mutations
-export const MUTATE_TOKEN_DETAILS = 'afas-debugger/MUTATE_TOKEN_DETAILS'
-export const MUTATE_TESTING_CONNECTION = 'afas-debugger/MUTATE_TESTING_CONNECTION'
-export const MUTATE_TOKEN_SUCCESSFULLY_CONNECTED = 'afas-debugger/MUTATE_TOKEN_SUCCESSFULLY_CONNECTED'
+export const MUTATE_TOKEN = 'afas-debugger/MUTATE_TOKEN'
+export const MUTATE_TOKEN_CONNECTION = 'afas-debugger/MUTATE_TOKEN_CONNECTION'
+export const MUTATE_TOKEN_CONNECTION_STATUS = 'afas-debugger/MUTATE_TOKEN_CONNECTION_STATUS'
+export const MUTATE_TOKEN_CONNECTION_MESSAGE = 'afas-debugger/MUTATE_TOKEN_CONNECTION_MESSAGE'
+export const MUTATE_TOKEN_CONNECTION_SUCCESS = 'afas-debugger/MUTATE_TOKEN_CONNECTION_SUCCESS'
 
 // Actions
-export const LOAD_TOKEN_DETAILS = 'afas-debugger/LOAD_TOKEN_DETAILS'
-export const SAVE_TOKEN_DETAILS = 'afas-debugger/SAVE_TOKEN_DETAILS'
+export const LOAD_TOKEN = 'afas-debugger/LOAD_TOKEN'
+export const SAVE_TOKEN = 'afas-debugger/SAVE_TOKEN'
+export const CLEAR_TOKEN = 'afas-debugger/CLEAR_TOKEN'
 export const TEST_CONNECTION = 'afas-debugger/TEST_CONNECTION'
-export const CLEAR_TOKEN_DETAILS = 'afas-debugger/CLEAR_TOKEN_DETAILS'

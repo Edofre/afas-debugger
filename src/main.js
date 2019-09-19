@@ -16,7 +16,7 @@ import './fontawesome.js'
 axios.defaults.headers.get['Content-Type'] = 'application/json'
 // Add AFAS token if we have it
 // axios.interceptors.request.use((config) => {
-//   const token = localStorage.getItem('token')
+//   const token = localStorage.getItem('afas_token')
 //   if (token) {
 //     config.headers.Authorization = 'AfasToken ' + token
 //   }

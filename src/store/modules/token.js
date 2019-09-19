@@ -2,55 +2,64 @@ import * as types from '../types'
 import axios from 'axios'
 
 const state = {
-  tokenDetails: null,
-  testingConnection: false,
-  tokenSuccessfullyConnected: false
+  token: null,
+  tokenConnection: {
+    status: types.STATUS_INIT,
+    message: null,
+    success: false
+  }
 }
 
 const getters = {
-  tokenDetails: (state) => {
-    return state.tokenDetails
+  token: (state) => {
+    return state.token
   },
-  testingConnection: (state) => {
-    return state.testingConnection
-  },
-  tokenSuccessfullyConnected: (state) => {
-    return state.tokenSuccessfullyConnected
+  tokenConnection: (state) => {
+    return state.tokenConnection
   }
 }
 
 const mutations = {
-  [types.MUTATE_TOKEN_DETAILS]: (state, tokenDetails) => {
-    state.tokenDetails = tokenDetails
+  [types.MUTATE_TOKEN]: (state, token) => {
+    state.token = token
   },
-  [types.MUTATE_TESTING_CONNECTION]: (state, token) => {
-    state.testingConnection = token
+  [types.MUTATE_TOKEN_CONNECTION]: (state, tokenConnection) => {
+    state.tokenConnection = tokenConnection
   },
-  [types.MUTATE_TOKEN_SUCCESSFULLY_CONNECTED]: (state, token) => {
-    state.tokenSuccessfullyConnected = token
+  [types.MUTATE_TOKEN_CONNECTION_SUCCESS]: (state, success) => {
+    state.tokenConnection.success = success
+  },
+  [types.MUTATE_TOKEN_CONNECTION_STATUS]: (state, status) => {
+    state.tokenConnection.status = status
+  },
+  [types.MUTATE_TOKEN_CONNECTION_MESSAGE]: (state, message) => {
+    state.tokenConnection.messge = message
   }
 }
 
 const actions = {
-  [types.LOAD_TOKEN_DETAILS]: ({ commit }, tokenDetails) => {
-    commit(types.MUTATE_TOKEN_DETAILS, JSON.parse(tokenDetails))
+  [types.LOAD_TOKEN]: ({ commit }, token) => {
+    commit(types.MUTATE_TOKEN, JSON.parse(token))
   },
-  [types.CLEAR_TOKEN_DETAILS]: ({ commit }, tokenDetails) => {
-    localStorage.removeItem('tokenDetails')
-    commit(types.MUTATE_TOKEN_DETAILS, null)
+  [types.CLEAR_TOKEN]: ({ commit }, token) => {
+    localStorage.removeItem('afas_token')
+    commit(types.MUTATE_TOKEN, null)
   },
-  [types.SAVE_TOKEN_DETAILS]: ({ commit }, tokenDetails) => {
-    commit(types.MUTATE_TOKEN_DETAILS, tokenDetails)
-    localStorage.setItem('tokenDetails', JSON.stringify(tokenDetails))
+  [types.SAVE_TOKEN]: ({ commit }, token) => {
+    commit(types.MUTATE_TOKEN, token)
+    localStorage.setItem('afas_token', JSON.stringify(token))
   },
-  [types.TEST_CONNECTION]: ({ commit, dispatch }, tokenDetails) => {
-    commit(types.MUTATE_TESTING_CONNECTION, true)
-    commit(types.MUTATE_TOKEN_SUCCESSFULLY_CONNECTED, false)
+  [types.TEST_CONNECTION]: ({ commit, dispatch }, token) => {
+    commit(types.MUTATE_TOKEN_CONNECTION, {
+      status: types.STATUS_LOADING,
+      message: null,
+      success: false
+    })
 
-    const token = btoa(tokenDetails.token)
-    const authorizationHeader = `AfasToken ${token}`
+    const encodedToken = btoa(token.token)
+    const authorizationHeader = `AfasToken ${encodedToken}`
     // TODO, test/acceptance
-    const url = `https://${tokenDetails.id}.resttest.afas.online/profitrestservices/metainfo`
+    const url = `https://${token.id}.resttest.afas.online/profitrestservices/metainfo`
 
     axios
       .get(url, {
@@ -59,14 +68,15 @@ const actions = {
         }
       })
       .then(res => {
-        console.log(res.data)
-        commit(types.MUTATE_TOKEN_SUCCESSFULLY_CONNECTED, true)
+        commit(types.MUTATE_TOKEN_CONNECTION_SUCCESS, true)
+        commit(types.MUTATE_TOKEN_CONNECTION_MESSAGE, res.data)
       })
       .catch(error => {
-        console.log(error) // TODO
+        commit(types.MUTATE_TOKEN_CONNECTION_SUCCESS, false)
+        commit(types.MUTATE_TOKEN_CONNECTION_MESSAGE, error)
       })
       .finally(() => {
-        commit(types.MUTATE_TESTING_CONNECTION, false)
+        commit(types.MUTATE_TOKEN_CONNECTION_STATUS, types.STATUS_FINISHED)
       })
   }
 }

@@ -72,11 +72,11 @@
           >
             <font-awesome-icon class="font-awesome-icon" icon="plug"/>
             Test connection
-            <font-awesome-icon v-if="testingConnection" class="font-awesome-icon" icon="spinner" spin/>
+            <font-awesome-icon v-if="tokenConnection.status === STATUS_LOADING" class="font-awesome-icon" icon="spinner" spin/>
           </button>
 
           <button
-            v-if="tokenSuccessfullyConnected"
+            v-if="tokenConnection.success"
             :disabled="$v.$invalid"
             :class="{'opacity-50 cursor-not-allowed': $v.$invalid, 'hover:bg-afas-red': !$v.$invalid}"
             @click="save"
@@ -94,7 +94,7 @@
 
 <script>
   import { minLength, required } from 'vuelidate/lib/validators'
-  import { SAVE_TOKEN_DETAILS, TEST_CONNECTION } from '../../store/types'
+  import { SAVE_TOKEN, TEST_CONNECTION, STATUS_LOADING } from '../../store/types'
 
   export default {
     name: 'SaveToken',
@@ -107,15 +107,13 @@
           { id: 'test', 'name': 'Testing' },
           { id: 'acceptance', 'name': 'Acceptance' },
           { id: 'production', 'name': 'Production' }
-        ]
+        ],
+        STATUS_LOADING
       }
     },
     computed: {
-      tokenSuccessfullyConnected() {
-        return this.$store.getters.tokenSuccessfullyConnected
-      },
-      testingConnection() {
-        return this.$store.getters.testingConnection
+      tokenConnection() {
+        return this.$store.getters.tokenConnection
       }
     },
     validations: {
@@ -133,22 +131,22 @@
     },
     methods: {
       save() {
-        const tokenDetails = {
+        const token = {
           id: this.id,
           environment: this.environment,
           token: this.token
         }
 
-        this.$store.dispatch(SAVE_TOKEN_DETAILS, tokenDetails)
+        this.$store.dispatch(SAVE_TOKEN, token)
       },
       testConnection() {
-        const tokenDetails = {
+        const token = {
           id: this.id,
           environment: this.environment,
           token: this.token
         }
 
-        this.$store.dispatch(TEST_CONNECTION, tokenDetails)
+        this.$store.dispatch(TEST_CONNECTION, token)
       }
     }
   }

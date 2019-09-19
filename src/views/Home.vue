@@ -1,28 +1,38 @@
 <template>
   <div class="home">
 
-    <div class="border bg-white shadow-lg rounded-lg max-w-lg mx-auto mt-4">
-      <app-token-details v-if="tokenDetails"></app-token-details>
-      <app-save-token v-else></app-save-token>
-
+    <div class="px-2 mt-4">
+      <div class="flex -mx-2">
+        <div class="w-5/12 m-auto px-2 border bg-white shadow-lg rounded-lg">
+          <app-token v-if="token"></app-token>
+          <app-save-token v-else></app-save-token>
+        </div>
+        <div class="w-5/12 m-auto px-2 border bg-white shadow-lg rounded-lg">
+          <app-connection-status></app-connection-status>
+        </div>
+      </div>
     </div>
+
   </div>
 </template>
 
 <script>
-  import TokenDetails from '@/components/Token/TokenDetails.vue'
+  import Token from '@/components/Token/Token.vue'
   import SaveToken from '@/components/Token/SaveToken.vue'
+  import ConnectionStatus from '@/components/Token/ConnectionStatus.vue'
 
   export default {
     name: 'home',
     components: {
-      'app-token-details': TokenDetails,
-      'app-save-token': SaveToken
+      'app-token': Token,
+      'app-save-token': SaveToken,
+      'app-connection-status': ConnectionStatus
     },
     computed: {
-      tokenDetails() {
-        return this.$store.getters.tokenDetails
+      token() {
+        return this.$store.getters.token
       }
+
     }
   }
 </script>

@@ -1,21 +1,25 @@
 <template>
-  <div class="text-xs">
-    <label class="uppercase text-gray-700 font-bold">
-      Current token:
-    </label>
-    {{ token.id }}
+  <div>
+    Testing
   </div>
 </template>
 
 <script>
+  import { CLEAR_TOKEN } from '../../store/types'
+
   export default {
-    name: 'CurrentToken',
+    name: 'ConnectionStatus',
     data() {
       return {}
     },
     computed: {
       token() {
         return this.$store.getters.token
+      }
+    },
+    methods: {
+      clear() {
+        this.$store.dispatch(CLEAR_TOKEN)
       }
     }
   }

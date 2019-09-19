@@ -1,16 +1,16 @@
 <template>
-  <div v-if="tokenDetails" class="sm:flex sm:items-center px-6 py-6">
+  <div v-if="token" class="sm:flex sm:items-center px-6 py-6">
     <div class="md:w-1/3 px-3 md:mb-0">
       <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold">
         ID
       </label>
-      {{ tokenDetails.id }}
+      {{ token.id }}
     </div>
     <div class="md:w-1/3 px-3 md:mb-0">
       <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold">
         Environment
       </label>
-      {{ tokenDetails.environment }}
+      {{ token.environment }}
     </div>
     <div class="md:w-1/3 px-3 md:mb-0">
       <button
@@ -24,21 +24,21 @@
 </template>
 
 <script>
-  import { CLEAR_TOKEN_DETAILS } from '../../store/types'
+  import { CLEAR_TOKEN } from '../../store/types'
 
   export default {
-    name: 'TokenDetails',
+    name: 'Token',
     data() {
       return {}
     },
     computed: {
-      tokenDetails() {
-        return this.$store.getters.tokenDetails
+      token() {
+        return this.$store.getters.token
       }
     },
     methods: {
       clear() {
-        this.$store.dispatch(CLEAR_TOKEN_DETAILS)
+        this.$store.dispatch(CLEAR_TOKEN)
       }
     }
   }
