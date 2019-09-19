@@ -8,7 +8,7 @@
           <app-save-token v-else></app-save-token>
         </div>
 
-        <transition appear name="slide" mode="out-in">
+        <transition appear name="slide">
           <div v-if="tokenConnection.message" class="w-5/12 m-auto p-2 border bg-white shadow-lg rounded-lg">
             <app-connection-status></app-connection-status>
           </div>

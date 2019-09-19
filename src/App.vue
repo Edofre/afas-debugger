@@ -76,7 +76,7 @@
     created() {
       let token = localStorage.getItem('afas_token')
       if (token) {
-        this.$store.dispatch(LOAD_TOKEN, token)
+        this.$store.dispatch(LOAD_TOKEN, JSON.parse(token))
       }
     }
   }

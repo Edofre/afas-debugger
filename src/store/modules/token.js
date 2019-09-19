@@ -39,7 +39,7 @@ const mutations = {
 
 const actions = {
   [types.LOAD_TOKEN]: ({ commit }, token) => {
-    commit(types.MUTATE_TOKEN, JSON.parse(token))
+    commit(types.MUTATE_TOKEN, token)
   },
   [types.CLEAR_TOKEN]: ({ commit }, token) => {
     localStorage.removeItem('afas_token')
