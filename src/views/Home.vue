@@ -7,9 +7,12 @@
           <app-token v-if="token"></app-token>
           <app-save-token v-else></app-save-token>
         </div>
-        <div class="w-5/12 m-auto px-2 border bg-white shadow-lg rounded-lg">
-          <app-connection-status></app-connection-status>
-        </div>
+
+        <transition appear name="slide" mode="out-in">
+          <div v-if="tokenConnection.message" class="w-5/12 m-auto p-2 border bg-white shadow-lg rounded-lg">
+            <app-connection-status></app-connection-status>
+          </div>
+        </transition>
       </div>
     </div>
 
@@ -31,8 +34,10 @@
     computed: {
       token() {
         return this.$store.getters.token
+      },
+      tokenConnection() {
+        return this.$store.getters.tokenConnection
       }
-
     }
   }
 </script>

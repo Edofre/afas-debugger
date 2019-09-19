@@ -1,11 +1,13 @@
 <template>
-  <div>
-    Testing
+  <div class="border rounded relative p-2" :class="{'border-red-400 bg-red-400 text-red-700': !tokenConnection.success, 'border-green-400 bg-green-400 text-green-700': tokenConnection.success}">
+    <strong class="font-bold">
+      Response:
+    </strong>
+    {{ tokenConnection.message }}
   </div>
 </template>
 
 <script>
-  import { CLEAR_TOKEN } from '../../store/types'
 
   export default {
     name: 'ConnectionStatus',
@@ -13,13 +15,13 @@
       return {}
     },
     computed: {
-      token() {
-        return this.$store.getters.token
+      tokenConnection() {
+        return this.$store.getters.tokenConnection
       }
     },
     methods: {
-      clear() {
-        this.$store.dispatch(CLEAR_TOKEN)
+      clearMessage() {
+        // this.$store.dispatch(CLEAR_TOKEN)
       }
     }
   }

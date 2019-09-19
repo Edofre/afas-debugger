@@ -33,7 +33,7 @@ const mutations = {
     state.tokenConnection.status = status
   },
   [types.MUTATE_TOKEN_CONNECTION_MESSAGE]: (state, message) => {
-    state.tokenConnection.messge = message
+    state.tokenConnection.message = message
   }
 }
 
@@ -48,6 +48,13 @@ const actions = {
   [types.SAVE_TOKEN]: ({ commit }, token) => {
     commit(types.MUTATE_TOKEN, token)
     localStorage.setItem('afas_token', JSON.stringify(token))
+
+    // Remove connection details
+    commit(types.MUTATE_TOKEN_CONNECTION, {
+      status: types.STATUS_INIT,
+      message: null,
+      success: false
+    })
   },
   [types.TEST_CONNECTION]: ({ commit, dispatch }, token) => {
     commit(types.MUTATE_TOKEN_CONNECTION, {
@@ -58,6 +65,7 @@ const actions = {
 
     const encodedToken = btoa(token.token)
     const authorizationHeader = `AfasToken ${encodedToken}`
+
     // TODO, test/acceptance
     const url = `https://${token.id}.resttest.afas.online/profitrestservices/metainfo`
 
