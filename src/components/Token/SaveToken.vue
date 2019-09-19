@@ -80,7 +80,7 @@
             :disabled="$v.$invalid"
             :class="{'opacity-50 cursor-not-allowed': $v.$invalid, 'hover:bg-afas-red': !$v.$invalid}"
             @click="save"
-            class="bg-afas-blue text-white font-bold py-2 px-4 ml-2 rounded focus:outline-none focus:shadow-outline"
+            class="bg-afas-blue text-white font-bold py-2 px-4 ml-2 rounded focus:outline-none focus:shadow-outline float-right"
           >
             <font-awesome-icon class="font-awesome-icon" icon="save"/>
             Save token

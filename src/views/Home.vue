@@ -1,6 +1,7 @@
 <template>
   <div class="home">
-    <div class="border m-6 rounded-lg bg-white max-w-lg mx-auto shadow-lg rounded-lg">
+
+    <div class="border bg-white shadow-lg rounded-lg max-w-lg mx-auto mt-4">
       <app-token-details v-if="tokenDetails"></app-token-details>
       <app-save-token v-else></app-save-token>
 
