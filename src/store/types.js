@@ -7,16 +7,27 @@ export const STATUS_INIT = 0
 export const STATUS_LOADING = 1
 export const STATUS_FINISHED = 2
 
+/*
+|--------------------------------------------------------------------------
+| AFAS
+|--------------------------------------------------------------------------
+*/
+// Mutations
+export const MUTATE_VERSION = 'afas/MUTATE_VERSION'
+
+// Actions
+export const LOAD_VERSION = 'token/LOAD_VERSION'
 
 /*
 |--------------------------------------------------------------------------
 | AFAS
 |--------------------------------------------------------------------------
 */
-export const MUTATE_VERSION = 'afas/MUTATE_VERSION'
+// Mutations
+export const MUTATE_GET_CONNECTORS = 'afas/MUTATE_GET_CONNECTORS'
 
 // Actions
-export const LOAD_VERSION = 'token/LOAD_VERSION'
+export const LOAD_GET_CONNECTORS = 'token/LOAD_GET_CONNECTORS'
 
 /*
 |--------------------------------------------------------------------------
