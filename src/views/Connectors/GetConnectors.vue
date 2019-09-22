@@ -3,8 +3,7 @@
 
     <div class="px-2 mt-4">
       <div class="flex -mx-2">
-        <div class="w-3/12 m-auto px-2 border bg-white shadow-lg rounded-lg">
-          <h2>Select GetConnector</h2>
+        <div class="w-3/12 m-auto p-2 border bg-white shadow-lg rounded-lg">
           <div class="border rounded">
             <div v-for="getConnector in getConnectors" :key="getConnector.id" @click="select(getConnector)" class="border-b p-2 last:border-b-0 hover:bg-afas-blue hover:text-white cursor-pointer">
               <div class="overflow-hidden font-bold">
@@ -17,8 +16,12 @@
           </div>
         </div>
         <div class="w-8/12 m-auto px-2 border bg-white shadow-lg rounded-lg">
-          <div class="h-12">
-            2
+          <div v-if="selectedGetConnector" class="">
+            {{ selectedGetConnector.id }}
+            {{ selectedGetConnector.description }}
+          </div>
+          <div v-else>
+            {{ 'Please select a connector' }}
           </div>
         </div>
       </div>
@@ -32,6 +35,11 @@
 
   export default {
     name: 'getConnectors',
+    data() {
+      return {
+        selectedGetConnector: null
+      }
+    },
     components: {},
     computed: {
       getConnectors() {
@@ -40,7 +48,7 @@
     },
     methods: {
       select(connector) {
-        console.log(connector)
+        this.selectedGetConnector = connector
       }
     },
     created() {
