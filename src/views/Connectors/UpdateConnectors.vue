@@ -20,9 +20,31 @@
 </template>
 
 <script>
+  import { LOAD_UPDATE_CONNECTORS } from '../../store/types'
 
   export default {
     name: 'updateConnectors',
-    components: {}
+    data() {
+      return {
+        selectedUpdateConnector: null
+      }
+    },
+    components: {},
+    computed: {
+      updateConnectors() {
+        return this.$store.updateters.updateConnectors
+      }
+    },
+    methods: {
+      select(connector) {
+        this.selectedUpdateConnector = connector
+      }
+    },
+    created() {
+      let token = localStorage.getItem('afas_token')
+      if (token) {
+        this.$store.dispatch(LOAD_UPDATE_CONNECTORS, JSON.parse(token))
+      }
+    }
   }
 </script>

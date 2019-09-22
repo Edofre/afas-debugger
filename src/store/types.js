@@ -24,10 +24,12 @@ export const LOAD_VERSION = 'token/LOAD_VERSION'
 |--------------------------------------------------------------------------
 */
 // Mutations
-export const MUTATE_GET_CONNECTORS = 'afas/MUTATE_GET_CONNECTORS'
+export const MUTATE_GET_CONNECTORS = 'connectors/MUTATE_GET_CONNECTORS'
+export const MUTATE_UPDATE_CONNECTORS = 'connectors/MUTATE_UPDATE_CONNECTORS '
 
 // Actions
-export const LOAD_GET_CONNECTORS = 'token/LOAD_GET_CONNECTORS'
+export const LOAD_GET_CONNECTORS = 'connectors/LOAD_GET_CONNECTORS'
+export const LOAD_UPDATE_CONNECTORS = 'connectors/LOAD_UPDATE_CONNECTORS'
 
 /*
 |--------------------------------------------------------------------------

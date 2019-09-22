@@ -2,8 +2,8 @@
   <div class="get-connectors">
 
     <div class="px-2 mt-4">
-      <div class="flex -mx-2">
-        <div class="w-3/12 m-auto p-2 border bg-white shadow-lg rounded-lg">
+      <div class="flex ">
+        <div class="w-3/12 mx-auto p-2 border bg-white shadow-lg rounded-lg">
           <div class="border rounded">
             <div v-for="getConnector in getConnectors" :key="getConnector.id" @click="select(getConnector)" class="border-b p-2 last:border-b-0 hover:bg-afas-blue hover:text-white cursor-pointer">
               <div class="overflow-hidden font-bold">
@@ -15,7 +15,7 @@
             </div>
           </div>
         </div>
-        <div class="w-8/12 m-auto px-2 border bg-white shadow-lg rounded-lg">
+        <div class="w-8/12 mx-auto px-2 border bg-white shadow-lg rounded-lg">
           <div v-if="selectedGetConnector" class="">
             {{ selectedGetConnector.id }}
             {{ selectedGetConnector.description }}
