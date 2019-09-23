@@ -1,5 +1,6 @@
 import * as types from '../types'
 import axios from 'axios'
+import createAfasUrl from '../helpers/createAfasUrl'
 
 const state = {
   version: null
@@ -19,12 +20,9 @@ const mutations = {
 
 const actions = {
   [types.LOAD_VERSION]: ({ commit, dispatch }, token) => {
-
     const encodedToken = btoa(token.token)
     const authorizationHeader = `AfasToken ${encodedToken}`
-
-    // TODO, test/acceptance
-    const url = `https://${token.id}.rest.afas.online/profitrestservices/profitversion`
+    const url = createAfasUrl(token, 'profitversion')
 
     axios
       .get(url, {

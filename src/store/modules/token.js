@@ -1,5 +1,6 @@
 import * as types from '../types'
 import axios from 'axios'
+import createAfasUrl from '../helpers/createAfasUrl'
 
 const state = {
   token: null,
@@ -65,9 +66,7 @@ const actions = {
 
     const encodedToken = btoa(token.token)
     const authorizationHeader = `AfasToken ${encodedToken}`
-
-    // TODO, test/acceptance
-    const url = `https://${token.id}.resttest.afas.online/profitrestservices/metainfo`
+    const url = createAfasUrl(token, 'metainfo')
 
     axios
       .get(url, {
