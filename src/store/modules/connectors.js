@@ -5,15 +5,23 @@ import createAfasUrl from './../helpers/createAfasUrl'
 
 const state = {
   getConnectors: [],
-  updateConnectors: []
+  loadingGetConnectors: false,
+  updateConnectors: [],
+  loadingUpdateConnectors: false
 }
 
 const getters = {
   getConnectors: (state) => {
     return state.getConnectors
   },
+  loadingGetConnectors: (state) => {
+    return state.loadingGetConnectors
+  },
   updateConnectors: (state) => {
     return state.updateConnectors
+  },
+  loadingUpdateConnectors: (state) => {
+    return state.loadingUpdateConnectors
   }
 }
 
@@ -21,13 +29,21 @@ const mutations = {
   [types.MUTATE_GET_CONNECTORS]: (state, getConnectors) => {
     state.getConnectors = getConnectors
   },
+  [types.MUTATE_LOADING_GET_CONNECTORS]: (state, loadingGetConnectors) => {
+    state.loadingGetConnectors = loadingGetConnectors
+  },
   [types.MUTATE_UPDATE_CONNECTORS]: (state, updateConnectors) => {
     state.updateConnectors = updateConnectors
+  },
+  [types.MUTATE_LOADING_UPDATE_CONNECTORS]: (state, loadingUpdateConnectors) => {
+    state.loadingUpdateConnectors = loadingUpdateConnectors
   }
 }
 
 const actions = {
   [types.LOAD_GET_CONNECTORS]: ({ commit, dispatch }, token) => {
+    commit(types.MUTATE_LOADING_GET_CONNECTORS, true)
+
     const encodedToken = btoa(token.token)
     const authorizationHeader = `AfasToken ${encodedToken}`
     const url = createAfasUrl(token, 'metainfo')
@@ -46,10 +62,12 @@ const actions = {
         console.log(error)
       })
       .finally(() => {
-        console.log('finally')
+        commit(types.MUTATE_LOADING_GET_CONNECTORS, false)
       })
   },
   [types.LOAD_UPDATE_CONNECTORS]: ({ commit, dispatch }, token) => {
+    commit(types.MUTATE_LOADING_UPDATE_CONNECTORS, false)
+
     const encodedToken = btoa(token.token)
     const authorizationHeader = `AfasToken ${encodedToken}`
     const url = createAfasUrl(token, 'metainfo')
@@ -68,7 +86,7 @@ const actions = {
         console.log(error)
       })
       .finally(() => {
-        console.log('finally')
+        commit(types.MUTATE_LOADING_UPDATE_CONNECTORS, true)
       })
   }
 }

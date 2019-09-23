@@ -5,7 +5,10 @@
       <div class="flex ">
         <div class="w-3/12 mx-auto p-2 border bg-white shadow-lg rounded-lg">
           <div class="border rounded">
-            <div v-for="getConnector in getConnectors" :key="getConnector.id" @click="select(getConnector)" class="border-b p-2 last:border-b-0 hover:bg-afas-blue hover:text-white cursor-pointer">
+            <div v-if="loadingGetConnectors" class="text-center">
+              <font-awesome-icon class="font-awesome-icon" icon="spinner" spin/>
+            </div>
+            <div v-else v-for="getConnector in getConnectors" :key="getConnector.id" @click="select(getConnector)" class="border-b p-2 last:border-b-0 hover:bg-afas-blue hover:text-white cursor-pointer">
               <div class="overflow-hidden font-bold">
                 {{ getConnector.id }}
                 <div class="text-sm font-normal">
@@ -42,6 +45,9 @@
     },
     components: {},
     computed: {
+      loadingGetConnectors() {
+        return this.$store.getters.loadingGetConnectors
+      },
       getConnectors() {
         return this.$store.getters.getConnectors
       }
