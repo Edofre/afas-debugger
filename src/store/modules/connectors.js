@@ -1,6 +1,8 @@
 import * as types from '../types'
 import axios from 'axios'
 
+import createAfasUrl from './../helpers/createAfasUrl'
+
 const state = {
   getConnectors: [],
   updateConnectors: []
@@ -26,12 +28,11 @@ const mutations = {
 
 const actions = {
   [types.LOAD_GET_CONNECTORS]: ({ commit, dispatch }, token) => {
-
     const encodedToken = btoa(token.token)
     const authorizationHeader = `AfasToken ${encodedToken}`
 
     // TODO, test/acceptance
-    const url = `https://${token.id}.resttest.afas.online/profitrestservices/metainfo`
+    const url = createAfasUrl(token, 'metainfo')
 
     axios
       .get(url, {
@@ -51,12 +52,12 @@ const actions = {
       })
   },
   [types.LOAD_UPDATE_CONNECTORS]: ({ commit, dispatch }, token) => {
-
     const encodedToken = btoa(token.token)
     const authorizationHeader = `AfasToken ${encodedToken}`
+    const environment = token.environment
 
     // TODO, test/acceptance
-    const url = `https://${token.id}.resttest.afas.online/profitrestservices/metainfo`
+    const url = `https://${token.id}.${environment}.afas.online/profitrestservices/metainfo`
 
     axios
       .get(url, {

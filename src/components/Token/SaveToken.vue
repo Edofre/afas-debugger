@@ -94,7 +94,7 @@
 
 <script>
   import { minLength, required } from 'vuelidate/lib/validators'
-  import { SAVE_TOKEN, TEST_CONNECTION, STATUS_LOADING } from '../../store/types'
+  import { SAVE_TOKEN, STATUS_LOADING, TEST_CONNECTION } from '../../store/types'
 
   export default {
     name: 'SaveToken',
@@ -105,7 +105,7 @@
         token: null,
         envOptions: [
           { id: 'test', 'name': 'Testing' },
-          { id: 'acceptance', 'name': 'Acceptance' },
+          { id: 'accept', 'name': 'Acceptance' },
           { id: 'production', 'name': 'Production' }
         ],
         STATUS_LOADING
