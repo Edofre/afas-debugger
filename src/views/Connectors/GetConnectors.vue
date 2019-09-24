@@ -7,10 +7,10 @@
             <font-awesome-icon class="font-awesome-icon" icon="spinner" spin/>
           </div>
           <div v-else>
-            <div class="text-right mb-2">
+            <div class="text-center mb-2">
               <button
                 @click="reload"
-                class="bg-afas-blue hover:bg-afas-red text-white font-bold text-xs p-2 rounded focus:outline-none focus:shadow-outline"
+                class="w-full bg-afas-blue hover:bg-afas-red text-white font-bold text-xs p-2 rounded focus:outline-none focus:shadow-outline"
               >
                 <font-awesome-icon class="font-awesome-icon" icon="sync"/>
                 Refresh
