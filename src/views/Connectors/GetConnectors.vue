@@ -1,32 +1,46 @@
 <template>
   <div class="get-connectors">
-
-    <!-- TODO, add refresh button  -->
-
     <div class="px-2 mt-4">
-      <div class="flex ">
+      <div class="flex">
         <div class="w-3/12 mx-auto p-2 border bg-white shadow-lg rounded-lg">
-          <div class="border rounded">
-            <div v-if="loadingGetConnectors" class="text-center">
-              <font-awesome-icon class="font-awesome-icon" icon="spinner" spin/>
+          <div v-if="loadingGetConnectors" class="text-center">
+            <font-awesome-icon class="font-awesome-icon" icon="spinner" spin/>
+          </div>
+          <div v-else>
+            <div class="text-right mb-2">
+              <button
+                @click="reload"
+                class="bg-afas-blue hover:bg-afas-red text-white font-bold text-xs p-2 rounded focus:outline-none focus:shadow-outline"
+              >
+                <font-awesome-icon class="font-awesome-icon" icon="sync"/>
+                Refresh
+              </button>
             </div>
-            <div v-else v-for="getConnector in getConnectors" :key="getConnector.id" @click="select(getConnector)" class="border-b p-2 last:border-b-0 hover:bg-afas-blue hover:text-white cursor-pointer">
-              <div class="overflow-hidden font-bold">
-                {{ getConnector.id }}
-                <div class="text-sm font-normal">
-                  {{ getConnector.description }}
+
+            <div class="border rounded">
+              <div v-for="getConnector in getConnectors" :key="getConnector.id" @click="select(getConnector)" class="border-b p-2 last:border-b-0 hover:bg-afas-blue hover:text-white cursor-pointer">
+                <div class="overflow-hidden font-bold">
+                  {{ getConnector.id }}
+                  <div class="text-sm font-normal">
+                    {{ getConnector.description }}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="w-8/12 mx-auto px-2 border bg-white shadow-lg rounded-lg">
-          <div v-if="selectedGetConnector" class="">
-            {{ selectedGetConnector.id }}
-            {{ selectedGetConnector.description }}
+        <div class="w-8/12 mx-auto p-2 border bg-white shadow-lg rounded-lg">
+          <div v-if="loadingGetConnectors" class="text-center">
+            <font-awesome-icon class="font-awesome-icon" icon="spinner" spin/>
           </div>
           <div v-else>
-            {{ 'Please select a connector' }}
+            <div v-if="selectedGetConnector" class="">
+              {{ selectedGetConnector.id }}
+              {{ selectedGetConnector.description }}
+            </div>
+            <div v-else class="text-center" >
+              {{ 'Please select a connector' }}
+            </div>
           </div>
         </div>
       </div>
@@ -57,6 +71,10 @@
     methods: {
       select(connector) {
         this.selectedGetConnector = connector
+      },
+      reload() {
+        this.selectedGetConnector = null
+        this.$store.dispatch(LOAD_GET_CONNECTORS, JSON.parse(localStorage.getItem('afas_token')))
       }
     },
     created() {
