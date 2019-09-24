@@ -15,8 +15,9 @@
     <div class="md:w-1/3 px-3 md:mb-0">
       <button
         @click="clear"
-        class="bg-afas-blue hover:bg-afas-red text-white font-bold py-2 px-4 ml-2 rounded focus:outline-none focus:shadow-outline"
+        class="bg-afas-blue hover:bg-afas-red text-white text-sm p-2 rounded focus:outline-none focus:shadow-outline"
       >
+        <font-awesome-icon class="font-awesome-icon" icon="minus-circle"/>
         Clear
       </button>
     </div>
