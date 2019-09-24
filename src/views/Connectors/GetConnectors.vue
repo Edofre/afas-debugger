@@ -37,8 +37,11 @@
             <div v-if="selectedGetConnector" class="">
               {{ selectedGetConnector.id }}
               {{ selectedGetConnector.description }}
+
+              {{ loadingGetConnectorMetaInfo }}
+              {{ getConnectorMetaInfo }}
             </div>
-            <div v-else class="text-center" >
+            <div v-else class="text-center">
               {{ 'Please select a connector' }}
             </div>
           </div>
@@ -50,7 +53,7 @@
 </template>
 
 <script>
-  import { LOAD_GET_CONNECTORS } from '../../store/types'
+  import { LOAD_GET_CONNECTOR_META_INFO, LOAD_GET_CONNECTORS } from '../../store/types'
 
   export default {
     name: 'getConnectors',
@@ -66,11 +69,22 @@
       },
       getConnectors() {
         return this.$store.getters.getConnectors
+      },
+      loadingGetConnectorMetaInfo() {
+        return this.$store.getters.loadingGetConnectorMetaInfo
+      },
+      getConnectorMetaInfo() {
+        return this.$store.getters.getConnectorMetaInfo
       }
     },
     methods: {
-      select(connector) {
-        this.selectedGetConnector = connector
+      select(getConnector) {
+        this.selectedGetConnector = getConnector
+
+        this.$store.dispatch(LOAD_GET_CONNECTOR_META_INFO, {
+          token: JSON.parse(localStorage.getItem('afas_token')),
+          getConnector
+        })
       },
       reload() {
         this.selectedGetConnector = null
