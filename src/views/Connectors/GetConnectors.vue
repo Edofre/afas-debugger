@@ -18,7 +18,13 @@
             </div>
 
             <div class="border rounded">
-              <div v-for="getConnector in getConnectors" :key="getConnector.id" @click="select(getConnector)" class="border-b p-2 last:border-b-0 hover:bg-afas-blue hover:text-white cursor-pointer">
+              <div
+                v-for="getConnector in getConnectors"
+                :key="getConnector.id"
+                @click="select(getConnector)"
+                class="border-b p-2 last:border-b-0 hover:bg-afas-blue hover:text-white cursor-pointer"
+                :class="{'bg-afas-blue text-white' : getConnector === selectedGetConnector }"
+              >
                 <div class="overflow-hidden font-bold">
                   {{ getConnector.id }}
                   <div class="text-sm font-normal">
