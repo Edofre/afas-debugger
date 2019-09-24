@@ -1,6 +1,8 @@
 <template>
   <div class="get-connectors">
 
+    <!-- TODO, add refresh button  -->
+
     <div class="px-2 mt-4">
       <div class="flex ">
         <div class="w-3/12 mx-auto p-2 border bg-white shadow-lg rounded-lg">

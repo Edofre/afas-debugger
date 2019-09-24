@@ -5,8 +5,6 @@ import afas from './modules/afas'
 import connectors from './modules/connectors'
 import token from './modules/token'
 
-import createAfasUrlPlugin from './plugins/createAfasUrl'
-
 Vue.use(Vuex)
 
 export const store = new Vuex.Store({
@@ -14,6 +12,5 @@ export const store = new Vuex.Store({
     afas,
     connectors,
     token
-  },
-  plugins: [createAfasUrlPlugin]
+  }
 })
