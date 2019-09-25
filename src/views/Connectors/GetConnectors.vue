@@ -41,15 +41,54 @@
           </div>
           <div v-else>
             <div v-if="selectedGetConnector" class="">
-              <div class="text-lg">
-                {{ selectedGetConnector.description }}
-              </div>
-
               <div v-if="loadingGetConnectorMetaInfo" class="text-center">
                 <font-awesome-icon class="font-awesome-icon" icon="spinner" spin/>
               </div>
               <div v-else>
-                {{ getConnectorMetaInfo }}
+                <div class="text-lg">
+                  {{ getConnectorMetaInfo.name }}
+                  <span class="text-sm italic">
+                    ({{ getConnectorMetaInfo.description }})
+                  </span>
+                </div>
+
+                <div class="border rounded">
+                  <div
+                    v-for="field in getConnectorMetaInfo.fields"
+                    :key="field.id"
+                    class="border-b p-2 last:border-b-0"
+                  >
+                    <div class="overflow-hidden flex w-full">
+
+                      <div class="w-1/2">
+                        <dl class="inline-flex">
+                          <dt>{{ 'ID' }}</dt>
+                          <dd>{{ field.id }}</dd>
+                          <dt>{{ 'FieldID' }}</dt>
+                          <dd>{{ field.fieldId }}</dd>
+                          <dt>{{ 'Label' }}</dt>
+                          <dd>{{ field.label }}</dd>
+                          <dt>{{ 'ControlType' }}</dt>
+                          <dd>{{ field.controlType }}</dd>
+                        </dl>
+                      </div>
+
+                      <div class="w-1/2">
+                        <dl class="inline-flex">
+                          <dt>{{ 'DataType' }}</dt>
+                          <dd>{{ field.dataType }}</dd>
+                          <dt>{{ 'Length' }}</dt>
+                          <dd>{{ field.length }}</dd>
+                          <dt>{{ 'DecimalsFieldID' }}</dt>
+                          <dd>{{ field.decimals }}</dd>
+                          <dt>{{ 'DecimalsFieldID' }}</dt>
+                          <dd>{{ field.decimalsFieldId }}</dd>
+                        </dl>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
             <div v-else class="text-center">
@@ -110,3 +149,30 @@
     }
   }
 </script>
+
+<style scoped>
+  dl.inline-flex {
+    display: flex;
+    flex-flow: row;
+    flex-wrap: wrap;
+    width: 300px; /* set the container width*/
+    overflow: visible;
+  }
+
+  dl.inline-flex dt {
+    flex: 0 0 50%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    text-align: right;
+    padding-right: 10px;
+  }
+
+  dl.inline-flex dd {
+    font-weight: bold;
+    margin-left: auto;
+    text-align: left;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    flex: 0 0 50%
+  }
+</style>
