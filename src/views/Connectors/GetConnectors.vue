@@ -41,11 +41,16 @@
           </div>
           <div v-else>
             <div v-if="selectedGetConnector" class="">
-              {{ selectedGetConnector.id }}
-              {{ selectedGetConnector.description }}
+              <div class="text-lg">
+                {{ selectedGetConnector.description }}
+              </div>
 
-              {{ loadingGetConnectorMetaInfo }}
-              {{ getConnectorMetaInfo }}
+              <div v-if="loadingGetConnectorMetaInfo" class="text-center">
+                <font-awesome-icon class="font-awesome-icon" icon="spinner" spin/>
+              </div>
+              <div v-else>
+                {{ getConnectorMetaInfo }}
+              </div>
             </div>
             <div v-else class="text-center">
               {{ 'Please select a connector' }}
