@@ -68,7 +68,7 @@
             :disabled="$v.$invalid"
             :class="{'opacity-50 cursor-not-allowed': $v.$invalid, 'hover:bg-afas-red': !$v.$invalid}"
             type="submit"
-            class="bg-afas-blue text-white p-2 rounded focus:outline-none focus:shadow-outline"
+            class="bg-afas-blue text-white px-4 py-2 leading-none rounded focus:outline-none focus:shadow-outline"
           >
             <font-awesome-icon class="font-awesome-icon" icon="plug"/>
             Test connection
@@ -80,7 +80,7 @@
             :disabled="$v.$invalid"
             :class="{'opacity-50 cursor-not-allowed': $v.$invalid, 'hover:bg-afas-red': !$v.$invalid}"
             @click="save"
-            class="bg-afas-blue text-white p-2 rounded focus:outline-none focus:shadow-outline float-right"
+            class="bg-afas-blue text-white px-4 py-2 leading-none rounded focus:outline-none focus:shadow-outline float-right"
           >
             <font-awesome-icon class="font-awesome-icon" icon="save"/>
             Save token

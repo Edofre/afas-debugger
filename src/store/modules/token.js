@@ -76,7 +76,7 @@ const actions = {
       })
       .then(res => {
         commit(types.MUTATE_TOKEN_CONNECTION_SUCCESS, true)
-        commit(types.MUTATE_TOKEN_CONNECTION_MESSAGE, res.data)
+        commit(types.MUTATE_TOKEN_CONNECTION_MESSAGE, 'Successfully connected!')
       })
       .catch(error => {
         commit(types.MUTATE_TOKEN_CONNECTION_SUCCESS, false)

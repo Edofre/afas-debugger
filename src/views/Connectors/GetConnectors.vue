@@ -10,7 +10,7 @@
             <div class="text-center mb-2">
               <button
                 @click="reload"
-                class="w-full bg-afas-blue hover:bg-afas-red text-white font-bold text-xs p-2 rounded focus:outline-none focus:shadow-outline"
+                class="w-full bg-afas-blue hover:bg-afas-red text-white font-bold px-4 py-2 leading-none rounded focus:outline-none focus:shadow-outline"
               >
                 <font-awesome-icon class="font-awesome-icon" icon="sync"/>
                 Refresh
@@ -52,38 +52,62 @@
                   </span>
                 </div>
 
-                <div class="border rounded">
+                <div class="border-2 border-afas-blue rounded">
                   <div
                     v-for="field in getConnectorMetaInfo.fields"
                     :key="field.id"
-                    class="border-b p-2 last:border-b-0"
+                    class="border-b p-2 border-afas-blue last:border-b-0"
                   >
-                    <div class="overflow-hidden flex w-full">
-
-                      <div class="w-1/2">
-                        <dl class="inline-flex">
-                          <dt>{{ 'ID' }}</dt>
-                          <dd>{{ field.id }}</dd>
-                          <dt>{{ 'FieldID' }}</dt>
-                          <dd>{{ field.fieldId }}</dd>
-                          <dt>{{ 'Label' }}</dt>
-                          <dd>{{ field.label }}</dd>
-                          <dt>{{ 'ControlType' }}</dt>
-                          <dd>{{ field.controlType }}</dd>
-                        </dl>
+                    <div class="sm:flex sm:items-center pb-2 w-full">
+                      <div class="md:w-1/4 px-3 md:mb-0">
+                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold">
+                          ID
+                        </label>
+                        {{ field.id }}
                       </div>
-
-                      <div class="w-1/2">
-                        <dl class="inline-flex">
-                          <dt>{{ 'DataType' }}</dt>
-                          <dd>{{ field.dataType }}</dd>
-                          <dt>{{ 'Length' }}</dt>
-                          <dd>{{ field.length }}</dd>
-                          <dt>{{ 'DecimalsFieldID' }}</dt>
-                          <dd>{{ field.decimals }}</dd>
-                          <dt>{{ 'DecimalsFieldID' }}</dt>
-                          <dd>{{ field.decimalsFieldId }}</dd>
-                        </dl>
+                      <div class="md:w-1/4 px-3 md:mb-0">
+                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold">
+                          FieldID
+                        </label>
+                        {{ field.fieldId }}
+                      </div>
+                      <div class="md:w-1/4 px-3 md:mb-0">
+                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold">
+                          Label
+                        </label>
+                        {{ field.label }}
+                      </div>
+                      <div class="md:w-1/4 px-3 md:mb-0">
+                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold">
+                          ControlType
+                        </label>
+                        {{ field.controlType }}
+                      </div>
+                    </div>
+                    <div class="sm:flex border-t border-grey pt-2 sm:items-center w-full">
+                      <div class="md:w-1/4 px-3 md:mb-0">
+                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold">
+                          DataType
+                        </label>
+                        {{ field.dataType }}
+                      </div>
+                      <div class="md:w-1/4 px-3 md:mb-0">
+                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold">
+                          Length
+                        </label>
+                        {{ field.length }}
+                      </div>
+                      <div class="md:w-1/4 px-3 md:mb-0">
+                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold">
+                          Decimals
+                        </label>
+                        {{ field.decimals }}
+                      </div>
+                      <div class="md:w-1/4 px-3 md:mb-0">
+                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold">
+                          DecimalsFieldID
+                        </label>
+                        {{ field.decimalsFieldId }}
                       </div>
 
                     </div>
@@ -149,30 +173,3 @@
     }
   }
 </script>
-
-<style scoped>
-  dl.inline-flex {
-    display: flex;
-    flex-flow: row;
-    flex-wrap: wrap;
-    width: 300px; /* set the container width*/
-    overflow: visible;
-  }
-
-  dl.inline-flex dt {
-    flex: 0 0 50%;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    text-align: right;
-    padding-right: 10px;
-  }
-
-  dl.inline-flex dd {
-    font-weight: bold;
-    margin-left: auto;
-    text-align: left;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    flex: 0 0 50%
-  }
-</style>
