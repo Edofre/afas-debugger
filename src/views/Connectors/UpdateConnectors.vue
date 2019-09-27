@@ -175,8 +175,8 @@
           let search = this.search.toLowerCase()
           if (search) {
             fields = fields.filter(element =>
-              element.label.toLowerCase().indexOf(search) !== -1
-              || element.fieldId.toLowerCase().indexOf(search) !== -1
+              element.label.toLowerCase().indexOf(search) !== -1 ||
+              element.fieldId.toLowerCase().indexOf(search) !== -1
             )
           }
 

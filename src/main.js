@@ -6,6 +6,7 @@ import './registerServiceWorker'
 // Packages
 import Vuelidate from 'vuelidate'
 import axios from 'axios'
+import vClickOutside from 'v-click-outside'
 // Styles
 import '@/assets/scss/main.scss'
 import '@/assets/scss/tailwind.scss'
@@ -25,6 +26,9 @@ axios.defaults.headers.get['Content-Type'] = 'application/json'
 
 // Vuelidate
 Vue.use(Vuelidate)
+
+// Vue click outside
+Vue.use(vClickOutside)
 
 // Vue CLI
 Vue.config.productionTip = false
