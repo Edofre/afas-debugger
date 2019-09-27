@@ -52,8 +52,6 @@
                   </span>
                 </div>
 
-                {{ updateConnectorMetaInfo.objects }}
-
                 <div class="border-2 border-afas-blue rounded">
                   <div
                     v-for="field in updateConnectorMetaInfo.fields"
@@ -98,7 +96,7 @@
                         {{ field.label }}
                       </div>
                     </div>
-                    
+
                     <div class="sm:flex border-t border-grey pt-2 sm:items-center w-full">
                       <div class="md:w-1/5 px-3 md:mb-0">
                         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold">
