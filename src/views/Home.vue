@@ -4,12 +4,12 @@
     <div class="px-2 mt-4">
       <div class="flex -mx-2">
         <div class="w-5/12 m-auto px-2 border bg-white shadow-lg rounded-lg">
-          <button @click="openTesting" class="bg-afas-blue hover:bg-afas-red text-white px-4 py-2 leading-none rounded focus:outline-none focus:shadow-outline">
-            testing
-          </button>
-          <button @click="openOther" class="bg-afas-blue hover:bg-afas-red text-white px-4 py-2 leading-none rounded focus:outline-none focus:shadow-outline">
-            other
-          </button>
+          <!--          <button @click="openTesting" class="bg-afas-blue hover:bg-afas-red text-white px-4 py-2 leading-none rounded focus:outline-none focus:shadow-outline">-->
+          <!--            testing-->
+          <!--          </button>-->
+          <!--          <button @click="openOther" class="bg-afas-blue hover:bg-afas-red text-white px-4 py-2 leading-none rounded focus:outline-none focus:shadow-outline">-->
+          <!--            other-->
+          <!--          </button>-->
 
           <app-token v-if="token"></app-token>
           <app-save-token v-else></app-save-token>
@@ -22,13 +22,13 @@
       </div>
     </div>
 
-    <app-modal ref="testing">
-      Testing
-    </app-modal>
+    <!--    <app-modal ref="testing">-->
+    <!--      Testing-->
+    <!--    </app-modal>-->
 
-    <app-modal ref="other">
-      Other
-    </app-modal>
+    <!--    <app-modal ref="other">-->
+    <!--      Other-->
+    <!--    </app-modal>-->
 
   </div>
 </template>
