@@ -9,18 +9,6 @@ export const STATUS_FINISHED = 2
 
 /*
 |--------------------------------------------------------------------------
-| Modal
-|--------------------------------------------------------------------------
-*/
-// Mutations
-export const MUTATE_MODAL_OPEN = 'modal/MUTATE_MODAL_OPEN'
-
-// Actions
-export const OPEN_MODAL = 'modal/OPEN_MODAL'
-export const CLOSE_MODAL = 'modal/CLOSE_MODAL'
-
-/*
-|--------------------------------------------------------------------------
 | AFAS
 |--------------------------------------------------------------------------
 */

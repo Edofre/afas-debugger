@@ -1,68 +1,49 @@
 <template>
-  <div
-    :class="{'opacity-0': !openModal}"
-    class="modal pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center"
-  >
-    <div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
-
-    <div class="modal-container bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
-
-      <div
-        @click="clickClose"
-        class="cursor-pointer absolute top-0 right-0 cursor-pointer flex flex-col items-center mt-4 mr-4 text-white text-sm z-50"
-      >
-        <svg class="fill-current text-white" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
-          <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
-        </svg>
-        <span class="text-sm">(Esc)</span>
+  <div v-if="open" @click.self="closeModal" class="w-full pin absolute flex justify-center bg-transparent-black">
+    <div class="bg-white rounded shadow p-4 m-4 w-5/12 max-h-full overflow-y-scroll">
+      <div class="">
+        <span class="text-lg">
+          {{ 'Header' }}
+        </span>
+        <span @click="closeModal" class="p-0 float-right cursor-pointer">
+          <font-awesome-icon class="font-awesome-icon" icon="times"/>
+        </span>
       </div>
-
-      <!-- Add margin if you want to see some of the overlay behind the modal-->
-      <div class="modal-content py-4 text-left px-6">
-        <!-- Title -->
-        <div class="flex justify-between items-center pb-3">
-          <p class="text-2xl font-bold">Simple Modal!</p>
-          <div class="modal-close cursor-pointer z-50">
-            <svg class="fill-current text-black" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
-              <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
-            </svg>
-          </div>
-        </div>
-
-        <!-- Body -->
+      <div class="">
         <slot></slot>
-
-        <!-- Footer -->
-        <div class="flex justify-end pt-2">
-          <button @click="clickClose" class="bg-afas-blue cursor-pointer hover:bg-afas-red text-white px-4 py-2 leading-none rounded focus:outline-none focus:shadow-outline">
-            Close
-          </button>
-        </div>
       </div>
     </div>
   </div>
+  <!--  <div v-if="open" class="flex -mx-2">-->
+  <!--    <div class="w-5/12 m-auto bg-white shadow-lg rounded-lg">-->
+  <!--      <div class="animated fadeIn fixed z-50 pin overflow-auto bg-smoke-dark flex">-->
+  <!--        <div class="animated fadeInUp fixed shadow-inner max-w-md md:relative pin-b pin-x align-top m-auto justify-end md:justify-center p-8 bg-white md:rounded w-full md:h-auto md:shadow flex flex-col">-->
+
+  <!--          <slot></slot>-->
+
+  <!--          <span @click="closeModal" class="absolute pin-t pin-r pt-4 px-4">-->
+  <!--            <svg class="h-12 w-12 text-grey hover:text-grey-darkest" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/></svg>-->
+  <!--          </span>-->
+  <!--        </div>-->
+  <!--      </div>-->
+  <!--    </div>-->
+  <!--  </div>-->
 </template>
 
 <script>
-  import { CLOSE_MODAL, OPEN_MODAL } from '../../store/types'
-
   export default {
     name: 'Modal',
     data() {
-      return {}
-    },
-    computed: {
-      openModal() {
-        return this.$store.getters.openModal
+      return {
+        open: false
       }
     },
     methods: {
-      clickOpen() {
-        this.$store.dispatch(OPEN_MODAL)
+      openModal() {
+        this.open = true
       },
-      clickClose() {
-        console.log('close')
-        this.$store.dispatch(CLOSE_MODAL)
+      closeModal() {
+        this.open = false
       }
     }
   }
