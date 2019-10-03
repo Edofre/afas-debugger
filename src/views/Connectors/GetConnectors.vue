@@ -56,13 +56,11 @@
                 </div>
 
                 <div class="border-2 border-afas-blue rounded">
-                  <div
+                  <app-get-connector-field
                     v-for="field in fields"
                     :key="field.id"
-                    class="border-b p-2 border-afas-blue last:border-b-0"
-                  >
-                    <app-get-connector-field :field="field"></app-get-connector-field>
-                  </div>
+                    :field="field"
+                  ></app-get-connector-field>
                 </div>
               </div>
             </div>
