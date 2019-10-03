@@ -61,77 +61,7 @@
                     :key="field.id"
                     class="border-b p-2 border-afas-blue last:border-b-0"
                   >
-                    <div class="sm:flex sm:items-center pb-2 w-full">
-                      <div class="md:w-1/6 px-3 md:mb-0">
-                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold">
-                          ControlType
-                        </label>
-                        {{ field.controlType }}
-                      </div>
-                      <div class="md:w-1/6 px-3 md:mb-0">
-                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold">
-                          DataType
-                        </label>
-                        {{ field.dataType }}
-                      </div>
-                      <div class="md:w-1/6 px-3 md:mb-0">
-                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold">
-                          DecimalFieldId
-                        </label>
-                        {{ field.decimalFieldId }}
-                      </div>
-                      <div class="md:w-1/6 px-3 md:mb-0">
-                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold">
-                          Decimals
-                        </label>
-                        {{ field.decimals }}
-                      </div>
-                      <div class="md:w-1/6 px-3 md:mb-0">
-                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold">
-                          FieldId
-                        </label>
-                        {{ field.fieldId }}
-                      </div>
-                      <div class="md:w-1/6 px-3 md:mb-0">
-                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold">
-                          Label
-                        </label>
-                        {{ field.label }}
-                      </div>
-                    </div>
-
-                    <div class="sm:flex border-t border-grey pt-2 sm:items-center w-full">
-                      <div class="md:w-1/5 px-3 md:mb-0">
-                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold">
-                          Length
-                        </label>
-                        {{ field.length }}
-                      </div>
-                      <div class="md:w-1/5 px-3 md:mb-0">
-                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold">
-                          Mandatory
-                        </label>
-                        {{ field.mandatory }}
-                      </div>
-                      <div class="md:w-1/5 px-3 md:mb-0">
-                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold">
-                          Notzero
-                        </label>
-                        {{ field.notzero }}
-                      </div>
-                      <div class="md:w-1/5 px-3 md:mb-0">
-                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold">
-                          primaryKey
-                        </label>
-                        {{ field.primaryKey }}
-                      </div>
-                      <div class="md:w-1/5 px-3 md:mb-0">
-                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold">
-                          values
-                        </label>
-                        {{ field.values }}
-                      </div>
-                    </div>
+                    <app-update-connector-field :field="field"></app-update-connector-field>
                   </div>
                 </div>
               </div>
@@ -149,6 +79,7 @@
 
 <script>
   import { LOAD_UPDATE_CONNECTOR_META_INFO, LOAD_UPDATE_CONNECTORS } from '../../store/types'
+  import UpdateConnectorField from '@/components/Connectors/UpdateConnectorField.vue'
 
   export default {
     name: 'updateConnectors',
@@ -158,7 +89,9 @@
         search: ''
       }
     },
-    components: {},
+    components: {
+      'app-update-connector-field': UpdateConnectorField
+    },
     computed: {
       loadingUpdateConnectors() {
         return this.$store.getters.loadingUpdateConnectors
