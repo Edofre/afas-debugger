@@ -7,7 +7,6 @@
         </label>
         {{ field.label }}
       </div>
-
       <div class="md:w-1/2 px-3 md:mb-0">
         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold">
           FieldId
@@ -15,7 +14,6 @@
         {{ field.fieldId }}
       </div>
     </div>
-
     <div v-if="shouldShowDetails" class="border-t border-grey pt-2">
       <table class="w-1/2 text-left m-2">
         <tr class="border-b">
@@ -52,19 +50,24 @@
         </tr>
         <tr class="border-b">
           <td class="w-1/2 uppercase text-right text-xs font-bold">values</td>
-          <td class="w-1/2 pl-4">{{ field.values }}</td>
+          <td class="w-1/2 pl-4">
+            <app-field-values v-if="field.values" :values="field.values"></app-field-values>
+          </td>
         </tr>
       </table>
     </div>
-
   </div>
 </template>
 
 <script>
+  import FieldValues from '@/components/Connectors/FieldValues.vue'
 
   export default {
     name: 'updateConnectorField',
     props: ['field'],
+    components: {
+      'app-field-values': FieldValues
+    },
     data() {
       return {
         shouldShowDetails: false
