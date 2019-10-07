@@ -55,13 +55,21 @@
                   </span>
                 </div>
 
-                <div class="border-2 border-afas-blue rounded">
-                  <app-get-connector-field
-                    v-for="field in fields"
-                    :key="field.id"
-                    :field="field"
-                  ></app-get-connector-field>
-                </div>
+                <template v-if="fields.length">
+                  <div class="border-2 border-afas-blue rounded">
+                    <app-get-connector-field
+                      v-for="field in fields"
+                      :key="field.id"
+                      :field="field"
+                    ></app-get-connector-field>
+                  </div>
+                </template>
+                <template v-else>
+                  <div class="text-center font-bold">
+                    {{ search ? 'No fields found' : 'No fields available' }}
+                    <hr/>
+                  </div>
+                </template>
               </div>
             </div>
             <div v-else class="text-center">
