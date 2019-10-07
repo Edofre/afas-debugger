@@ -20,8 +20,8 @@
         {{ field.label }}
       </div>
     </div>
-    <div v-if="shouldShowDetails" class="border-t border-grey pt-2">
-      <table class="w-1/2 text-left m-2">
+    <div v-if="shouldShowDetails" class="border-t border-grey pt-2 sm:flex sm:items-center w-full">
+      <table class="w-1/2 text-left ml-auto mr-auto">
         <tr class="border-b">
           <td class="w-1/2 uppercase text-right text-xs font-bold">ControlType</td>
           <td class="w-1/2 pl-4">{{ field.controlType }}</td>
