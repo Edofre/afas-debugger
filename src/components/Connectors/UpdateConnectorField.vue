@@ -14,8 +14,8 @@
         {{ field.fieldId }}
       </div>
     </div>
-    <div v-if="shouldShowDetails" class="border-t border-grey pt-2">
-      <table class="w-1/2 text-left m-2">
+    <div v-if="shouldShowDetails" class="border-t border-grey pt-2 sm:flex sm:items-center w-full">
+      <table class="w-1/2 text-left ml-auto mr-auto">
         <tr class="border-b">
           <td class="w-1/2 uppercase text-right text-xs font-bold">Decimals</td>
           <td class="w-1/2 pl-4">{{ field.decimals }}</td>
@@ -37,7 +37,7 @@
           <td class="w-1/2 pl-4">{{ field.length }}</td>
         </tr>
         <tr class="border-b">
-          <td class="w-1/2 uppercase text-right text-xs font-bold">mandatory</td>
+          <td class="w-1/2 uppercase text-right text-xs font-bold">Mandatory</td>
           <td class="w-1/2 pl-4">{{ field.mandatory }}</td>
         </tr>
         <tr class="border-b">
@@ -45,17 +45,18 @@
           <td class="w-1/2 pl-4">{{ field.notzero }}</td>
         </tr>
         <tr class="border-b">
-          <td class="w-1/2 uppercase text-right text-xs font-bold">primaryKey</td>
+          <td class="w-1/2 uppercase text-right text-xs font-bold">PrimaryKey</td>
           <td class="w-1/2 pl-4">{{ field.primaryKey }}</td>
         </tr>
         <tr class="border-b">
-          <td class="w-1/2 uppercase text-right text-xs font-bold">values</td>
+          <td class="w-1/2 uppercase text-right text-xs font-bold">Values</td>
           <td class="w-1/2 pl-4">
             <app-field-values v-if="field.values" :values="field.values"></app-field-values>
           </td>
         </tr>
       </table>
     </div>
+
   </div>
 </template>
 
