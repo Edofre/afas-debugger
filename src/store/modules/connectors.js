@@ -79,7 +79,7 @@ const actions = {
     axios
       .get(url, {
         headers: {
-          'Authorization': authorizationHeader
+          'Authorization': authorizationHeader 
         }
       })
       .then(res => {

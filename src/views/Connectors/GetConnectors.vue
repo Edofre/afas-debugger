@@ -17,6 +17,10 @@
               </button>
             </div>
 
+            <div class="text-center mb-2">
+              <input type="text" class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded leading-tight px-2 py-1 focus:outline-none focus:bg-white" placeholder="Search" v-model="searchConnectors">
+            </div>
+
             <div class="border rounded">
               <div
                 v-for="getConnector in getConnectors"
@@ -91,6 +95,7 @@
     data() {
       return {
         selectedGetConnector: null,
+        searchConnectors: '',
         search: ''
       }
     },
@@ -102,7 +107,19 @@
         return this.$store.getters.loadingGetConnectors
       },
       getConnectors() {
-        return this.$store.getters.getConnectors
+        if (this.$store.getters.getConnectors.length) {
+          let getConnectors = this.$store.getters.getConnectors
+          let search = this.searchConnectors.toLowerCase()
+          if (search) {
+            getConnectors = getConnectors.filter(element =>
+              element.id.toLowerCase().indexOf(search) !== -1 ||
+              element.description.toLowerCase().indexOf(search) !== -1
+            )
+          }
+
+          return getConnectors
+        }
+        return []
       },
       loadingGetConnectorMetaInfo() {
         return this.$store.getters.loadingGetConnectorMetaInfo
