@@ -17,6 +17,10 @@
               </button>
             </div>
 
+            <div class="text-center mb-2">
+              <input type="text" class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded leading-tight px-2 py-1 focus:outline-none focus:bg-white" placeholder="Search" v-model="searchConnectors">
+            </div>
+
             <div class="border rounded">
               <div
                 v-for="updateConnector in updateConnectors"
@@ -92,6 +96,7 @@
     data() {
       return {
         selectedUpdateConnector: null,
+        searchConnectors: '',
         search: ''
       }
     },
@@ -103,7 +108,19 @@
         return this.$store.getters.loadingUpdateConnectors
       },
       updateConnectors() {
-        return this.$store.getters.updateConnectors
+        if (this.$store.getters.updateConnectors.length) {
+          let updateConnectors = this.$store.getters.updateConnectors
+          let search = this.searchConnectors.toLowerCase()
+          if (search) {
+            updateConnectors = updateConnectors.filter(element =>
+              element.id.toLowerCase().indexOf(search) !== -1 ||
+              element.description.toLowerCase().indexOf(search) !== -1
+            )
+          }
+
+          return updateConnectors
+        }
+        return []
       },
       loadingUpdateConnectorMetaInfo() {
         return this.$store.getters.loadingUpdateConnectorMetaInfo
