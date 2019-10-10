@@ -31,7 +31,7 @@ const actions = {
         }
       })
       .then(res => {
-        commit(types.MUTATE_VERSION, res.data)
+        commit(types.MUTATE_VERSION, res.data.version)
       })
       .catch(error => {
         console.log('Cannot retrieve version because of the following error:')
