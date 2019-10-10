@@ -55,7 +55,7 @@
                     ({{ updateConnectorMetaInfo.description }})
                   </span>
                   <span class="float-right">
-                    <input type="text" class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded leading-tight px-2 py-1 focus:outline-none focus:bg-white" placeholder="Search" v-model="search">
+                    <input type="text" class="appearance-none block text-sm w-full bg-gray-200 text-gray-700 border rounded leading-tight px-2 py-1 focus:outline-none focus:bg-white" placeholder="Search" v-model="search">
                   </span>
                 </div>
 
