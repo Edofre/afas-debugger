@@ -2,8 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 // Connectors
-import GetConnectors from './views/Connectors/GetConnectors.vue'
-import UpdateConnectors from './views/Connectors/UpdateConnectors.vue'
+import GetConnectors from './views/GetConnectors.vue'
+import UpdateConnectors from './views/UpdateConnectors.vue'
 
 Vue.use(Router)
 

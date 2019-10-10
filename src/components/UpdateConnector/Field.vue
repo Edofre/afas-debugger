@@ -61,7 +61,7 @@
 </template>
 
 <script>
-  import FieldValues from '@/components/Connectors/FieldValues.vue'
+  import FieldValues from '@/components/UpdateConnector/FieldValues.vue'
 
   export default {
     name: 'updateConnectorField',

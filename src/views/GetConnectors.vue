@@ -18,7 +18,7 @@
             </div>
 
             <div class="text-center mb-2">
-              <input type="text" class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded leading-tight px-2 py-1 focus:outline-none focus:bg-white" placeholder="Search" v-model="searchConnectors">
+              <input type="text" class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded leading-tight px-2 py-1 focus:outline-none focus:bg-white" placeholder="Search" v-model="search">
             </div>
 
             <div class="border rounded">
@@ -45,7 +45,9 @@
           </div>
           <div v-else>
 
-            // Fields
+            <app-fields :selectedGetConnector="selectedGetConnector"></app-fields>
+
+            <app-make-request></app-make-request>
 
           </div>
         </div>
@@ -55,20 +57,21 @@
 </template>
 
 <script>
-  import { LOAD_GET_CONNECTOR_META_INFO, LOAD_GET_CONNECTORS } from '../../store/types'
-  import GetConnectorField from '@/components/Connectors/GetConnectorField.vue'
+  import { LOAD_GET_CONNECTOR_META_INFO, LOAD_GET_CONNECTORS } from '../store/types'
+  import Fields from '@/components/GetConnector/Fields.vue'
+  import MakeRequest from '@/components/GetConnector/MakeRequest.vue'
 
   export default {
     name: 'getConnectors',
     data() {
       return {
         selectedGetConnector: null,
-        searchConnectors: '',
         search: ''
       }
     },
     components: {
-      'app-get-connector-field': GetConnectorField
+      'app-fields': Fields,
+      'app-make-request': MakeRequest
     },
     computed: {
       loadingGetConnectors() {
@@ -77,7 +80,7 @@
       getConnectors() {
         if (this.$store.getters.getConnectors.length) {
           let getConnectors = this.$store.getters.getConnectors
-          let search = this.searchConnectors.toLowerCase()
+          let search = this.search.toLowerCase()
           if (search) {
             getConnectors = getConnectors.filter(element =>
               element.id.toLowerCase().indexOf(search) !== -1 ||
@@ -88,28 +91,6 @@
           return getConnectors
         }
         return []
-      },
-      loadingGetConnectorMetaInfo() {
-        return this.$store.getters.loadingGetConnectorMetaInfo
-      },
-      fields() {
-        if (this.getConnectorMetaInfo) {
-          let fields = this.getConnectorMetaInfo.fields
-          let search = this.search.toLowerCase()
-          if (search) {
-            fields = fields.filter(element =>
-              element.label.toLowerCase().indexOf(search) !== -1 ||
-              element.id.toLowerCase().indexOf(search) !== -1 ||
-              element.fieldId.toLowerCase().indexOf(search) !== -1
-            )
-          }
-
-          return fields
-        }
-        return []
-      },
-      getConnectorMetaInfo() {
-        return this.$store.getters.getConnectorMetaInfo
       }
     },
     methods: {
