@@ -45,10 +45,14 @@
           </div>
           <div v-else>
 
-            <app-fields :selectedGetConnector="selectedGetConnector"></app-fields>
+            <div class="cursor-pointer" @click="selectComponent('app-fields')">Fields</div>
+            <div class="cursor-pointer" @click="selectComponent('app-make-request')">Make requests</div>
 
-            <app-make-request></app-make-request>
-
+            <keep-alive>
+              <component v-bind:is="selectedComponent" :selectedGetConnector="selectedGetConnector"></component>
+            </keep-alive>
+            <!--            <app-fields ></app-fields>-->
+            <!--            <app-make-request></app-make-request>-->
           </div>
         </div>
       </div>
@@ -66,7 +70,8 @@
     data() {
       return {
         selectedGetConnector: null,
-        search: ''
+        search: '',
+        selectedComponent: 'app-fields'
       }
     },
     components: {
@@ -105,6 +110,9 @@
       reload() {
         this.selectedGetConnector = null
         this.$store.dispatch(LOAD_GET_CONNECTORS, JSON.parse(localStorage.getItem('afas_token')))
+      },
+      selectComponent(component) {
+        this.selectedComponent = component
       }
     },
     created() {
