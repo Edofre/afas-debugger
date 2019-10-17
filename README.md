@@ -1,5 +1,7 @@
 # afas-debugger
 
+With this project you can easily see the available connectors that your token provides
+
 ## Project setup
 ```
 npm install
