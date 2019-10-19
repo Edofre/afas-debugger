@@ -1,6 +1,6 @@
 <template>
-  <div class="text-xs">
-    <label class="uppercase text-gray-700 font-bold">
+  <div class="text-xs font-bold">
+    <label class="uppercase text-white">
       Current token:
     </label>
     {{ token.id }}
