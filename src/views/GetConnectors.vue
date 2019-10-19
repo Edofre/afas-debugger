@@ -44,15 +44,30 @@
             <font-awesome-icon class="font-awesome-icon" icon="spinner" spin/>
           </div>
           <div v-else>
-
-            <div class="cursor-pointer" @click="selectComponent('app-fields')">Fields</div>
-            <div class="cursor-pointer" @click="selectComponent('app-make-request')">Make requests</div>
+            <ul class="flex">
+              <li class="flex-1 mr-2">
+                <div
+                  @click="selectComponent('app-fields')"
+                  class="text-center block border rounded py-2 px-4 cursor-pointer"
+                  :class="{'border-afas-blue bg-afas-blue text-white': selectedComponent === 'app-fields'}"
+                >
+                  Fields
+                </div>
+              </li>
+              <li class="flex-1 mr-2">
+                <div
+                  @click="selectComponent('app-make-request')"
+                  class="text-center block border rounded py-2 px-4 cursor-pointer"
+                  :class="{'border-afas-blue bg-afas-blue text-white': selectedComponent === 'app-make-request'}"
+                >
+                  Make requests
+                </div>
+              </li>
+            </ul>
 
             <keep-alive>
               <component v-bind:is="selectedComponent" :selectedGetConnector="selectedGetConnector"></component>
             </keep-alive>
-            <!--            <app-fields ></app-fields>-->
-            <!--            <app-make-request></app-make-request>-->
           </div>
         </div>
       </div>
