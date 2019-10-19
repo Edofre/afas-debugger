@@ -2,11 +2,12 @@ import Vue from 'vue'
 
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faMinusCircle, faPlug, faSave, faSpinner, faSync, faTimes } from '@fortawesome/free-solid-svg-icons'
+import { faMinusCircle, faPlay, faPlug, faSave, faSpinner, faSync, faTimes } from '@fortawesome/free-solid-svg-icons'
 
 // Add the icons to the library
 library.add(
   faMinusCircle,
+  faPlay,
   faPlug,
   faSave,
   faSpinner,

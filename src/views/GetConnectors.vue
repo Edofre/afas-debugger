@@ -60,7 +60,7 @@
                   class="text-center block border rounded py-2 px-4 cursor-pointer"
                   :class="{'border-afas-blue bg-afas-blue text-white': selectedComponent === 'app-make-request'}"
                 >
-                  Make requests
+                  Make request
                 </div>
               </li>
             </ul>
