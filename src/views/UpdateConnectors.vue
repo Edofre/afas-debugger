@@ -44,9 +44,30 @@
             <font-awesome-icon class="font-awesome-icon" icon="spinner" spin/>
           </div>
           <div v-else>
-            <app-fields :selectedUpdateConnector="selectedUpdateConnector"></app-fields>
+            <ul class="flex mb-2">
+              <li class="flex-1 mr-2">
+                <div
+                  @click="selectComponent('app-fields')"
+                  class="text-center block border rounded py-2 px-4 cursor-pointer"
+                  :class="{'border-afas-blue bg-afas-blue text-white': selectedComponent === 'app-fields'}"
+                >
+                  Fields
+                </div>
+              </li>
+              <li class="flex-1 mr-2">
+                <div
+                  @click="selectComponent('app-make-request')"
+                  class="text-center block border rounded py-2 px-4 cursor-pointer"
+                  :class="{'border-afas-blue bg-afas-blue text-white': selectedComponent === 'app-make-request'}"
+                >
+                  Make requests
+                </div>
+              </li>
+            </ul>
 
-            <app-make-request></app-make-request>
+            <keep-alive>
+              <component v-bind:is="selectedComponent" :selectedUpdateConnector="selectedUpdateConnector"></component>
+            </keep-alive>
           </div>
         </div>
       </div>
@@ -64,8 +85,9 @@
     name: 'updateConnectors',
     data() {
       return {
-        selectedUpdateConnector: null,
         search: '',
+        selectedUpdateConnector: null,
+        selectedComponent: 'app-fields'
       }
     },
     components: {
@@ -104,6 +126,9 @@
       reload() {
         this.selectedUpdateConnector = null
         this.$store.dispatch(LOAD_UPDATE_CONNECTORS, JSON.parse(localStorage.getItem('afas_token')))
+      },
+      selectComponent(component) {
+        this.selectedComponent = component
       }
     },
     created() {

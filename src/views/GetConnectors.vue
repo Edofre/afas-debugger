@@ -44,7 +44,7 @@
             <font-awesome-icon class="font-awesome-icon" icon="spinner" spin/>
           </div>
           <div v-else>
-            <ul class="flex">
+            <ul class="flex mb-2">
               <li class="flex-1 mr-2">
                 <div
                   @click="selectComponent('app-fields')"
@@ -84,8 +84,8 @@
     name: 'getConnectors',
     data() {
       return {
-        selectedGetConnector: null,
         search: '',
+        selectedGetConnector: null,
         selectedComponent: 'app-fields'
       }
     },
