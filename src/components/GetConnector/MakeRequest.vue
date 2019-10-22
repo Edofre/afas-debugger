@@ -1,6 +1,6 @@
 <template>
   <div v-if="selectedGetConnector" class="">
-    <form class="w-full" @submit.prevent="testConnection">
+    <form class="w-full" @submit.prevent="execute">
       <div class="flex flex-wrap mb-2">
         <div class="md:w-1/5 px-3">
           <label
@@ -77,8 +77,8 @@
     props: ['selectedGetConnector'],
     data() {
       return {
-        'skip': null,
-        'take': null
+        skip: 0,
+        take: 100
       }
     },
     computed: {
@@ -101,11 +101,11 @@
     },
     methods: {
       execute() {
-        let getConnector = this.selectedGetConnector
-
         this.$store.dispatch(EXECUTE_GET_CONNECTOR, {
           token: JSON.parse(localStorage.getItem('afas_token')),
-          getConnector
+          getConnector: this.selectedGetConnector,
+          skip: this.skip,
+          take: this.take
         })
       }
     }
