@@ -7,7 +7,9 @@ const state = {
   getConnectors: [],
   loadingGetConnectors: false,
   getConnectorMetaInfo: [],
-  loadingGetConnectorMetaInfo: false
+  loadingGetConnectorMetaInfo: false,
+  responseGetConnector: null,
+  executingGetConnector: false
 }
 
 const getters = {
@@ -22,6 +24,12 @@ const getters = {
   },
   loadingGetConnectorMetaInfo() {
     return state.loadingGetConnectorMetaInfo
+  },
+  responseGetConnector() {
+    return state.responseGetConnector
+  },
+  executingGetConnector() {
+    return state.executingGetConnector
   }
 }
 
@@ -37,6 +45,12 @@ const mutations = {
   },
   [types.MUTATE_LOADING_GET_CONNECTOR_META_INFO]: (state, loadingGetConnectorMetaInfo) => {
     state.loadingGetConnectorMetaInfo = loadingGetConnectorMetaInfo
+  },
+  [types.MUTATE_RESPONSE_GET_CONNECTOR]: (state, responseGetConnector) => {
+    state.responseGetConnector = responseGetConnector
+  },
+  [types.MUTATE_EXECUTING_GET_CONNECTOR]: (state, executingGetConnector) => {
+    state.executingGetConnector = executingGetConnector
   }
 }
 
@@ -90,6 +104,33 @@ const actions = {
       })
       .finally(() => {
         commit(types.MUTATE_LOADING_GET_CONNECTOR_META_INFO, false)
+      })
+  },
+  [types.EXECUTE_GET_CONNECTOR]: ({ commit, dispatch }, data) => {
+    commit(types.MUTATE_EXECUTING_GET_CONNECTOR, true)
+
+    const token = data.token
+    const getConnector = data.getConnector
+
+    const encodedToken = btoa(token.token)
+    const authorizationHeader = `AfasToken ${encodedToken}`
+    const url = createAfasUrl(token, 'connectors/' + getConnector.id)
+
+    axios
+      .get(url, {
+        headers: {
+          'Authorization': authorizationHeader
+        }
+      })
+      .then(res => {
+        commit(types.MUTATE_RESPONSE_GET_CONNECTOR, res.data)
+      })
+      .catch(error => {
+        console.log('Cannot execute GetConnector because of the following error:')
+        console.log(error)
+      })
+      .finally(() => {
+        commit(types.MUTATE_EXECUTING_GET_CONNECTOR, false)
       })
   }
 }

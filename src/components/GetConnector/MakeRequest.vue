@@ -52,8 +52,17 @@
           </button>
         </div>
       </div>
-
     </form>
+
+    <div v-if="!executingGetConnector">
+      <div v-if="responseGetConnector">
+        {{ responseGetConnector }}
+      </div>
+    </div>
+    <div v-else>
+      <font-awesome-icon class="font-awesome-icon" icon="spinner" spin/>
+    </div>
+
   </div>
   <div v-else class="text-center">
     {{ 'Please select a connector' }}
@@ -62,6 +71,7 @@
 
 <script>
   import { minLength, numeric } from 'vuelidate/lib/validators'
+  import { EXECUTE_GET_CONNECTOR } from '../../store/types'
 
   export default {
     props: ['selectedGetConnector'],
@@ -69,6 +79,14 @@
       return {
         'skip': null,
         'take': null
+      }
+    },
+    computed: {
+      executingGetConnector() {
+        return this.$store.getters.executingGetConnector
+      },
+      responseGetConnector() {
+        return this.$store.getters.responseGetConnector
       }
     },
     validations: {
@@ -83,7 +101,12 @@
     },
     methods: {
       execute() {
-        console.log('execute')
+        let getConnector = this.selectedGetConnector
+
+        this.$store.dispatch(EXECUTE_GET_CONNECTOR, {
+          token: JSON.parse(localStorage.getItem('afas_token')),
+          getConnector
+        })
       }
     }
 
