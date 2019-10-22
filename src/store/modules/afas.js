@@ -37,9 +37,6 @@ const actions = {
         console.log('Cannot retrieve version because of the following error:')
         console.log(error)
       })
-      .finally(() => {
-        console.log('finally')
-      })
   }
 }
 

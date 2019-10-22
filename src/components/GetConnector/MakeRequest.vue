@@ -16,7 +16,7 @@
             class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-2 px-4 leading-tight focus:outline-none focus:bg-white"
             id="skip"
             type="text"
-            placeholder="123456"
+            placeholder=""
           >
           <p v-if="$v.skip.$error" class="text-red-500 text-xs italic">Skip can only be a positive field</p>
         </div>
@@ -35,7 +35,7 @@
             class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-2 px-4 leading-tight focus:outline-none focus:bg-white"
             id="take"
             type="text"
-            placeholder="123456"
+            placeholder=""
           >
           <p v-if="$v.take.$error" class="text-red-500 text-xs italic">Skip can only be a positive field</p>
         </div>
