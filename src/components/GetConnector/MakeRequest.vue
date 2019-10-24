@@ -56,7 +56,11 @@
 
     <div v-if="!executingGetConnector">
       <div v-if="responseGetConnector">
-        <json-viewer :value="jsonData"></json-viewer>
+        <json-viewer
+          :value="responseGetConnector"
+          :expand-depth=3
+          copyable
+        ></json-viewer>
       </div>
     </div>
     <div v-else>
@@ -91,19 +95,6 @@
       },
       responseGetConnector() {
         return this.$store.getters.responseGetConnector
-      },
-      jsonData() {
-        return {
-          total: 25,
-          limit: 10,
-          skip: 0,
-          links: {
-            previous: undefined,
-            next: function() {
-            }
-          },
-          data: this.responseGetConnector()
-        }
       }
     },
     validations: {
