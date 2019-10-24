@@ -56,7 +56,7 @@
 
     <div v-if="!executingGetConnector">
       <div v-if="responseGetConnector">
-        {{ responseGetConnector }}
+        <json-viewer :value="jsonData"></json-viewer>
       </div>
     </div>
     <div v-else>
@@ -72,9 +72,13 @@
 <script>
   import { minLength, numeric } from 'vuelidate/lib/validators'
   import { EXECUTE_GET_CONNECTOR } from '../../store/types'
+  import JsonViewer from 'vue-json-viewer'
 
   export default {
     props: ['selectedGetConnector'],
+    components: {
+      JsonViewer
+    },
     data() {
       return {
         skip: 0,
@@ -87,6 +91,19 @@
       },
       responseGetConnector() {
         return this.$store.getters.responseGetConnector
+      },
+      jsonData() {
+        return {
+          total: 25,
+          limit: 10,
+          skip: 0,
+          links: {
+            previous: undefined,
+            next: function() {
+            }
+          },
+          data: this.responseGetConnector()
+        }
       }
     },
     validations: {

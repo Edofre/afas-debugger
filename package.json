@@ -19,6 +19,7 @@
     "sass-loader": "^7.1.0",
     "tailwindcss": "^1.1.2",
     "vue": "^2.6.10",
+    "vue-json-viewer": "^2.2.6",
     "vue-router": "^3.0.3",
     "vuelidate": "^0.7.4",
     "vuex": "^3.0.1"
