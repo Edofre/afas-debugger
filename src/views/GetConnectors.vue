@@ -100,6 +100,7 @@
       getConnectors() {
         if (this.$store.getters.getConnectors.length) {
           let getConnectors = this.$store.getters.getConnectors
+
           let search = this.search.toLowerCase()
           if (search) {
             getConnectors = getConnectors.filter(element =>

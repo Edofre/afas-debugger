@@ -40,6 +40,8 @@
           <p v-if="$v.take.$error" class="text-red-500 text-xs italic">Skip can only be a positive field</p>
         </div>
 
+        {{ fields }}
+
         <div class="md:w-1/5 mt-5">
           <button
             :disabled="$v.$invalid"
@@ -95,6 +97,15 @@
       },
       responseGetConnector() {
         return this.$store.getters.responseGetConnector
+      },
+      getConnectorMetaInfo() {
+        return this.$store.getters.getConnectorMetaInfo
+      },
+      fields() {
+        if (this.getConnectorMetaInfo) {
+          return this.getConnectorMetaInfo.fields
+        }
+        return []
       }
     },
     validations: {
