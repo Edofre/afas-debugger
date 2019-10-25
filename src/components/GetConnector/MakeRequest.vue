@@ -48,7 +48,7 @@
             <select
               v-if="fields.length > 0"
               v-model="filter"
-              @blur="selectFilter"
+              @change="selectFilter"
               class="form-select mt-1 appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-2 px-4 leading-tight focus:outline-none focus:bg-white"
             >
               <option value="" disabled selected>Select filter</option>
