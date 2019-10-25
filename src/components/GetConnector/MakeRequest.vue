@@ -46,6 +46,7 @@
           <label class="block uppercase tracking-wide text-xs font-bold">
             <span class="text-gray-700">Select filter</span>
             <select
+              v-if="fields.length > 0"
               v-model="filter"
               @blur="selectFilter"
               class="form-select mt-1 appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-2 px-4 leading-tight focus:outline-none focus:bg-white"
@@ -53,6 +54,7 @@
               <option value="" disabled selected>Select filter</option>
               <option v-for="field in fields" :key="field.id" :value="field.id">{{ field.label }}</option>
             </select>
+            <div class="" v-else>No fields to filter</div>
           </label>
         </div>
       </div>
