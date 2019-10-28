@@ -60,20 +60,20 @@
       </div>
 
       <div v-if="filters.length > 0" class="w-full max-w-sm">
-        <div v-for="selectedFilter in filters" class="md:flex md:items-center">
+        <div v-for="selectedFilter in filters" class="md:flex md:items-center mt-2">
           <div class="md:w-1/3">
             <label class="block text-gray-700 font-bold md:text-right mt-4 pr-4" for="inline-full-name">
               {{ selectedFilter.label }}
             </label>
           </div>
-          <div class="md:w-2/3">
+          <div class="md:w-1/3">
             <label class="block uppercase tracking-wide text-xs font-bold">
               <span class="text-gray-700">Direction</span>
               <select
                 v-model="selectedFilter.direction"
                 class="form-select mt-1 appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-2 px-4 leading-tight focus:outline-none focus:bg-white"
               >
-                <option value="asc" selected>Asc</option>
+                <option value="asc">Asc</option>
                 <option value="desc">Desc</option>
               </select>
             </label>
@@ -155,16 +155,12 @@
       fields() {
         if (this.getConnectorMetaInfo) {
           let fields = this.getConnectorMetaInfo.fields
-
           if (this.filters.length > 0) {
-
             let filters = this.filters
-
             fields = fields.filter(x => {
               return filters.findIndex(t => t.id === x.id) === -1
             })
           }
-
           return fields
         }
         return []
@@ -182,11 +178,14 @@
     },
     methods: {
       removeFilter(filter) {
-        this.filters = this.filters.filter(function (x) { return x.id !== filter.id })
+        this.filters = this.filters.filter(function(x) {
+          return x.id !== filter.id
+        })
       },
       selectFilter() {
         let filter = this.filter
         let filterObject = this.fields.find(x => x.id === filter)
+        filterObject.direction = 'asc'
         this.filters.push(filterObject)
         this.filter = null // Reset the filter
       },
