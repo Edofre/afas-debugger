@@ -59,10 +59,27 @@
         </div>
       </div>
 
-      <div v-if="filters.length > 0" class="flex flex-wrap mb-2">
-        {{ filters }}
+      <div v-if="filters.length > 0" class="w-full max-w-sm">
+        <div v-for="selectedFilter in filters" class="md:flex md:items-center">
+          <div class="md:w-1/3">
+            <label class="block text-gray-700 font-bold md:text-right mt-4 pr-4" for="inline-full-name">
+              {{ selectedFilter.label }}
+            </label>
+          </div>
+          <div class="md:w-2/3">
+            <label class="block uppercase tracking-wide text-xs font-bold">
+              <span class="text-gray-700">Direction</span>
+              <select
+                v-model="selectedFilter.direction"
+                class="form-select mt-1 appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-2 px-4 leading-tight focus:outline-none focus:bg-white"
+              >
+                <option value="asc" selected>Asc</option>
+                <option value="desc">Desc</option>
+              </select>
+            </label>
+          </div>
+        </div>
       </div>
-
 
       <div class="md:w-1/5 mt-5">
         <button
