@@ -78,6 +78,14 @@
               </select>
             </label>
           </div>
+          <div class="md:w-1/3 ml-1 mt-5">
+            <button
+              @click="removeFilter(selectedFilter)"
+              class="bg-afas-red hover:bg-afas-blue text-white py-2 px-4 leading-none rounded focus:outline-none focus:shadow-outline"
+            >
+              <font-awesome-icon class="font-awesome-icon" icon="trash"/>
+            </button>
+          </div>
         </div>
       </div>
 
@@ -173,6 +181,9 @@
       }
     },
     methods: {
+      removeFilter(filter) {
+        this.filters = this.filters.filter(function (x) { return x.id !== filter.id })
+      },
       selectFilter() {
         let filter = this.filter
         let filterObject = this.fields.find(x => x.id === filter)
