@@ -100,8 +100,6 @@
           Execute
         </button>
       </div>
-
-
     </form>
 
     <div v-if="!executingGetConnector">
