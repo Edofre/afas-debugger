@@ -3,8 +3,11 @@ export default function createAfasUrl(token, endpoint, filters = []) {
 
   if (filters.length > 0) {
     let filter = Array.prototype.map.call(filters, s => (s.direction === 'asc' ? '' : '-') + s.id).toString()
-    return `https://${token.id}.rest${environment}.afas.online/profitrestservices/${endpoint}?orderbyfieldids=${filter}`
+    return `https://${token.id}.rest${environment}.afas.online/profitrestservices/${endpoint}&orderbyfieldids=${filter}`
   }
 
   return `https://${token.id}.rest${environment}.afas.online/profitrestservices/${endpoint}`
 }
+
+// https://87134.rest.afas.online/ProfitRestServices/connectors/AFASPocket_Activities?orderbyfieldids=-description
+//

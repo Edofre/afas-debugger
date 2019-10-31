@@ -109,6 +109,7 @@
           :expand-depth=3
           copyable
         ></json-viewer>
+        <!--        {{ responseGetConnector }}-->
       </div>
     </div>
     <div v-else>
