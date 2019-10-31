@@ -194,7 +194,8 @@
           token: JSON.parse(localStorage.getItem('afas_token')),
           getConnector: this.selectedGetConnector,
           skip: this.skip,
-          take: this.take
+          take: this.take,
+          filters: this.filters
         })
       }
     }
