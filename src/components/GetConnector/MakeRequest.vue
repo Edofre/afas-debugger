@@ -3,7 +3,6 @@
     <form class="w-full" @submit.prevent="execute">
 
       <div class="flex flex-wrap mb-2">
-
         <div class="md:w-1/5 px-3">
           <label
             class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1"
@@ -57,6 +56,18 @@
             <div class="" v-else>No fields to sortation</div>
           </label>
         </div>
+
+        <div class="md:w-1/5 mt-5 px-5">
+          <button
+            :disabled="$v.$invalid"
+            :class="{'opacity-50 cursor-not-allowed': $v.$invalid, 'hover:bg-afas-red': !$v.$invalid}"
+            @click="execute"
+            class="bg-afas-blue text-white py-3 px-4 leading-none rounded focus:outline-none focus:shadow-outline"
+          >
+            <font-awesome-icon class="font-awesome-icon" icon="play"/>
+            Execute
+          </button>
+        </div>
       </div>
 
       <div v-if="sortations.length > 0" class="w-full max-w-sm">
@@ -89,17 +100,69 @@
         </div>
       </div>
 
-      <div class="md:w-1/5 mt-5">
-        <button
-          :disabled="$v.$invalid"
-          :class="{'opacity-50 cursor-not-allowed': $v.$invalid, 'hover:bg-afas-red': !$v.$invalid}"
-          @click="execute"
-          class="bg-afas-blue text-white py-3 px-4 leading-none rounded focus:outline-none focus:shadow-outline"
-        >
-          <font-awesome-icon class="font-awesome-icon" icon="play"/>
-          Execute
-        </button>
+      <div v-for="filter in filters" class="flex flex-wrap mb-2">
+        <div class="md:w-1/5 mt-5 px-5">
+          <button
+            v-if="filter.removable"
+            @click="removeFilter(filter)"
+            class="bg-afas-blue hover:bg-afas-red text-white py-3 px-4 leading-none rounded focus:outline-none focus:shadow-outline"
+          >
+            <font-awesome-icon class="font-awesome-icon" icon="minus-circle"/>
+            Remove
+          </button>
+        </div>
+
+        <div class="md:w-1/5 px-3">
+          <label class="block uppercase tracking-wide text-xs font-bold">
+            <span class="text-gray-700">Field</span>
+            <select
+              v-model="filter.field"
+              class="form-select mt-1 appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-2 px-4 leading-tight focus:outline-none focus:bg-white"
+            >
+              <option value="" disabled selected>Select field</option>
+              <option v-for="filterField in filterFields" :key="filterField.id" :value="filterField.id">{{ filterField.label }}</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="md:w-1/5 px-3">
+          <label class="block uppercase tracking-wide text-xs font-bold">
+            <span class="text-gray-700">Operator</span>
+            <select
+              v-model="filter.operator"
+              class="form-select mt-1 appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-2 px-4 leading-tight focus:outline-none focus:bg-white"
+            >
+              <option value="" disabled selected>Select operator</option>
+              <option v-for="(option, key) in operatorOptions" :key="key" :value="key">{{ option }}</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="md:w-1/5 px-3">
+          <label
+            class="block uppercase tracking-wide text-gray-700 text-xs font-bold"
+          >
+            Value
+            <input
+              v-model="filter.value"
+              class="form-input appearance-none mt-1 block w-full bg-gray-200 text-gray-700 border rounded py-2 px-4 leading-tight focus:outline-none focus:bg-white"
+              type="text"
+              placeholder=""
+            >
+          </label>
+        </div>
+
+        <div class="md:w-1/5 mt-5 px-5">
+          <button
+            @click="addFilter()"
+            class="bg-afas-blue hover:bg-afas-red text-white py-3 px-4 leading-none rounded focus:outline-none focus:shadow-outline"
+          >
+            <font-awesome-icon class="font-awesome-icon" icon="plus-circle"/>
+            Add
+          </button>
+        </div>
       </div>
+
     </form>
 
     <div v-if="!executingGetConnector">
@@ -129,7 +192,27 @@
         take: 100,
         sortation: null,
         sortations: [],
-        directions: ['asc', 'desc']
+        directions: ['asc', 'desc'],
+        filters: [
+          { removable: false, field: null, operator: null, value: null }
+        ],
+        operatorOptions: {
+          1: '= (is equal to) [1]',
+          2: '>= (is greater or equal to) [2]',
+          3: '<= (is less or equal to) [3]',
+          4: '> (is greater than) [4]',
+          5: '< (is less than) [5]',
+          6: '* (contains text) [6]',
+          7: '!= (is not equal to) [7]',
+          8: '[] (is empty) [8]',
+          9: '![] (is not empty) [9]',
+          10: '@ (starts with) [10]',
+          11: '!* (does not contain text) [11]',
+          12: '!@ (does not start with) [12]',
+          13: '& (ends with) [13]',
+          14: '!& (does not ends with) [14]',
+          15: 'Sf (quickfilter) [15]'
+        }
       }
     },
     computed: {
@@ -152,6 +235,12 @@
             })
           }
           return fields
+        }
+        return []
+      },
+      filterFields() {
+        if (this.getConnectorMetaInfo) {
+          return this.getConnectorMetaInfo.fields
         }
         return []
       }
@@ -178,6 +267,16 @@
         sortationObject.direction = 'asc'
         this.sortations.push(sortationObject)
         this.sortation = null // Reset the sortation
+      },
+      addFilter() {
+        this.filters.push(
+          {
+            removable: true, field: null, operator: null, value: null
+          }
+        )
+      },
+      removeFilter(filter) {
+        this.filters.splice(this.filters.indexOf(filter), 1)
       },
       execute() {
         this.$store.dispatch(EXECUTE_GET_CONNECTOR, {
