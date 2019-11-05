@@ -44,33 +44,33 @@
 
         <div class="md:w-1/5 px-3">
           <label class="block uppercase tracking-wide text-xs font-bold">
-            <span class="text-gray-700">Select filter</span>
+            <span class="text-gray-700">Select sortation</span>
             <select
               v-if="fields.length > 0"
-              v-model="filter"
-              @change="selectFilter"
+              v-model="sortation"
+              @change="selectSortation"
               class="form-select mt-1 appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-2 px-4 leading-tight focus:outline-none focus:bg-white"
             >
-              <option value="" disabled selected>Select filter</option>
+              <option value="" disabled selected>Select sortation</option>
               <option v-for="field in fields" :key="field.id" :value="field.id">{{ field.label }}</option>
             </select>
-            <div class="" v-else>No fields to filter</div>
+            <div class="" v-else>No fields to sortation</div>
           </label>
         </div>
       </div>
 
-      <div v-if="filters.length > 0" class="w-full max-w-sm">
-        <div v-for="selectedFilter in filters" class="md:flex md:items-center mt-2">
+      <div v-if="sortations.length > 0" class="w-full max-w-sm">
+        <div v-for="selectedsortation in sortations" class="md:flex md:items-center mt-2">
           <div class="md:w-1/3">
             <label class="block text-gray-700 font-bold md:text-right mt-4 pr-4" for="inline-full-name">
-              {{ selectedFilter.label }}
+              {{ selectedsortation.label }}
             </label>
           </div>
           <div class="md:w-1/3">
             <label class="block uppercase tracking-wide text-xs font-bold">
               <span class="text-gray-700">Direction</span>
               <select
-                v-model="selectedFilter.direction"
+                v-model="selectedsortation.direction"
                 class="form-select mt-1 appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-2 px-4 leading-tight focus:outline-none focus:bg-white"
               >
                 <option value="asc">Asc</option>
@@ -80,7 +80,7 @@
           </div>
           <div class="md:w-1/3 ml-1 mt-5">
             <button
-              @click="removeFilter(selectedFilter)"
+              @click="removeSortation(selectedsortation)"
               class="bg-afas-red hover:bg-afas-blue text-white py-2 px-4 leading-none rounded focus:outline-none focus:shadow-outline"
             >
               <font-awesome-icon class="font-awesome-icon" icon="trash"/>
@@ -127,8 +127,8 @@
       return {
         skip: 0,
         take: 100,
-        filter: null,
-        filters: [],
+        sortation: null,
+        sortations: [],
         directions: ['asc', 'desc']
       }
     },
@@ -145,10 +145,10 @@
       fields() {
         if (this.getConnectorMetaInfo) {
           let fields = this.getConnectorMetaInfo.fields
-          if (this.filters.length > 0) {
-            let filters = this.filters
+          if (this.sortations.length > 0) {
+            let sortations = this.sortations
             fields = fields.filter(x => {
-              return filters.findIndex(t => t.id === x.id) === -1
+              return sortations.findIndex(t => t.id === x.id) === -1
             })
           }
           return fields
@@ -167,17 +167,17 @@
       }
     },
     methods: {
-      removeFilter(filter) {
-        this.filters = this.filters.filter(function(x) {
-          return x.id !== filter.id
+      removeSortation(sortation) {
+        this.sortations = this.sortations.filter(function(x) {
+          return x.id !== sortation.id
         })
       },
-      selectFilter() {
-        let filter = this.filter
-        let filterObject = this.fields.find(x => x.id === filter)
-        filterObject.direction = 'asc'
-        this.filters.push(filterObject)
-        this.filter = null // Reset the filter
+      selectSortation() {
+        let sortation = this.sortation
+        let sortationObject = this.fields.find(x => x.id === sortation)
+        sortationObject.direction = 'asc'
+        this.sortations.push(sortationObject)
+        this.sortation = null // Reset the sortation
       },
       execute() {
         this.$store.dispatch(EXECUTE_GET_CONNECTOR, {
@@ -185,7 +185,7 @@
           getConnector: this.selectedGetConnector,
           skip: this.skip,
           take: this.take,
-          filters: this.filters
+          sortations: this.sortations
         })
       }
     }
