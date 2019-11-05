@@ -114,7 +114,7 @@ const actions = {
 
     const encodedToken = btoa(token.token)
     const authorizationHeader = `AfasToken ${encodedToken}`
-    const url = createAfasUrl(token, 'connectors/' + getConnector.id + '?skip=' + data.skip + '&take=' + data.take, data.sortations)
+    const url = createAfasUrl(token, 'connectors/' + getConnector.id + '?skip=' + data.skip + '&take=' + data.take, data.sortations, data.filters)
 
     axios
       .get(url, {
