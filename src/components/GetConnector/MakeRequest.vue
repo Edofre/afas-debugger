@@ -42,17 +42,17 @@
 
         <div class="md:w-1/5 px-3">
           <label class="block uppercase tracking-wide text-xs font-bold">
-            <span class="text-gray-700">Select sortation</span>
+            <span class="text-gray-700">Select sortingField</span>
             <select
               v-if="fields.length > 0"
-              v-model="sortation"
-              @change="selectSortation"
+              v-model="sortingField"
+              @change="selectSortingField"
               class="form-select mt-1 appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-2 px-4 leading-tight focus:outline-none focus:bg-white"
             >
-              <option value="" disabled selected>Select sortation</option>
+              <option value="" disabled selected>Select sortingField</option>
               <option v-for="field in fields" :key="field.id" :value="field.id">{{ field.label }}</option>
             </select>
-            <div class="" v-else>No fields to sortation</div>
+            <div class="" v-else>No fields to sortingField</div>
           </label>
         </div>
 
@@ -90,7 +90,7 @@
           </div>
           <div class="md:w-1/3 ml-1 mt-5">
             <button
-              @click="removeSortation(sortingField)"
+              @click="removeSortingField(sortingField)"
               class="bg-afas-red hover:bg-afas-blue text-white py-2 px-4 leading-none rounded focus:outline-none focus:shadow-outline"
             >
               <font-awesome-icon class="font-awesome-icon" icon="trash"/>
@@ -180,13 +180,13 @@
 
 <script>
   import { minLength, numeric } from 'vuelidate/lib/validators'
-  import { EXECUTE_GET_CONNECTOR, MUTATE_ADD_FILTER, MUTATE_REMOVE_FILTER, MUTATE_SKIP, MUTATE_TAKE } from '../../store/types'
+  import { EXECUTE_GET_CONNECTOR, MUTATE_ADD_FILTER, MUTATE_ADD_SORTING_FIELD, MUTATE_REMOVE_FILTER, MUTATE_REMOVE_SORTING_FIELD, MUTATE_SKIP, MUTATE_TAKE } from '../../store/types'
 
   export default {
     props: ['selectedGetConnector'],
     data() {
       return {
-        sortation: null,
+        sortingField: null,
         directions: ['asc', 'desc'],
         operatorOptions: {
           1: '= (is equal to) [1]',
@@ -230,7 +230,7 @@
           this.$store.commit(MUTATE_TAKE, val)
         },
         get() {
-          return this.$store.getters.tale
+          return this.$store.getters.take
         }
       },
       filters() {
@@ -267,17 +267,13 @@
       }
     },
     methods: {
-      removeSortation(sortation) {
-        this.sortations = this.sortations.filter(function(x) {
-          return x.id !== sortation.id
-        })
+      removeSortingField(sortingField) {
+        this.$store.commit(MUTATE_REMOVE_SORTING_FIELD, sortingField)
       },
-      selectSortation() {
-        let sortation = this.sortation
-        let sortationObject = this.fields.find(x => x.id === sortation)
-        sortationObject.direction = 'asc'
-        this.sortations.push(sortationObject)
-        this.sortation = null // Reset the sortation
+      selectSortingField() {
+        this.$store.commit(MUTATE_ADD_SORTING_FIELD, this.sortingField)
+
+        this.sortingField = null // Reset the sortingField
       },
       addFilter() {
         this.$store.commit(MUTATE_ADD_FILTER, {

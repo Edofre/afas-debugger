@@ -80,6 +80,16 @@ const mutations = {
   [types.MUTATE_SORTING_FIELDS]: (state, sortingFields) => {
     state.sortingFields = sortingFields
   },
+  [types.MUTATE_ADD_SORTING_FIELD]: (state, sortingField) => {
+    let sortingFieldObject = this.fields.find(x => x.id === sortingField)
+    sortingFieldObject.direction = 'asc'
+    this.sortingFields.push(sortingFieldObject)
+  },
+  [types.MUTATE_REMOVE_SORTING_FIELD]: (state, sortingField) => {
+    state.sortations = state.sortations.filter(function(x) {
+      return x.id !== sortingField.id
+    })
+  },
   [types.MUTATE_FILTERS]: (state, filters) => {
     state.filters = filters
   },
