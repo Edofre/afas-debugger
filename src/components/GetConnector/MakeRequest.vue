@@ -1,7 +1,6 @@
 <template>
   <div v-if="selectedGetConnector" class="">
     <form class="w-full" @submit.prevent="execute">
-
       <div class="flex flex-wrap mb-2">
         <div class="md:w-1/5 px-3">
           <label
@@ -70,18 +69,18 @@
         </div>
       </div>
 
-      <div v-if="sortations.length > 0" class="w-full max-w-sm">
-        <div v-for="selectedsortation in sortations" class="md:flex md:items-center mt-2">
+      <div v-if="sortingFields.length > 0" class="w-full max-w-sm">
+        <div v-for="sortingField in sortingFields" class="md:flex md:items-center mt-2">
           <div class="md:w-1/3">
             <label class="block text-gray-700 font-bold md:text-right mt-4 pr-4" for="inline-full-name">
-              {{ selectedsortation.label }}
+              {{ sortingField.label }}
             </label>
           </div>
           <div class="md:w-1/3">
             <label class="block uppercase tracking-wide text-xs font-bold">
               <span class="text-gray-700">Direction</span>
               <select
-                v-model="selectedsortation.direction"
+                v-model="sortingField.direction"
                 class="form-select mt-1 appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-2 px-4 leading-tight focus:outline-none focus:bg-white"
               >
                 <option value="asc">Asc</option>
@@ -91,7 +90,7 @@
           </div>
           <div class="md:w-1/3 ml-1 mt-5">
             <button
-              @click="removeSortation(selectedsortation)"
+              @click="removeSortation(sortingField)"
               class="bg-afas-red hover:bg-afas-blue text-white py-2 px-4 leading-none rounded focus:outline-none focus:shadow-outline"
             >
               <font-awesome-icon class="font-awesome-icon" icon="trash"/>
@@ -162,7 +161,6 @@
           </button>
         </div>
       </div>
-
     </form>
 
     <div v-if="!executingGetConnector">
@@ -182,20 +180,14 @@
 
 <script>
   import { minLength, numeric } from 'vuelidate/lib/validators'
-  import { EXECUTE_GET_CONNECTOR } from '../../store/types'
+  import { EXECUTE_GET_CONNECTOR, MUTATE_ADD_FILTER, MUTATE_REMOVE_FILTER, MUTATE_SKIP, MUTATE_TAKE } from '../../store/types'
 
   export default {
     props: ['selectedGetConnector'],
     data() {
       return {
-        skip: 0,
-        take: 100,
         sortation: null,
-        sortations: [],
         directions: ['asc', 'desc'],
-        filters: [
-          { removable: false, field: null, operator: null, value: null }
-        ],
         operatorOptions: {
           1: '= (is equal to) [1]',
           2: '>= (is greater or equal to) [2]',
@@ -225,13 +217,32 @@
       getConnectorMetaInfo() {
         return this.$store.getters.getConnectorMetaInfo
       },
+      skip: {
+        set(val) {
+          this.$store.commit(MUTATE_SKIP, val)
+        },
+        get() {
+          return this.$store.getters.skip
+        }
+      },
+      take: {
+        set(val) {
+          this.$store.commit(MUTATE_TAKE, val)
+        },
+        get() {
+          return this.$store.getters.tale
+        }
+      },
+      filters() {
+        return this.$store.getters.getConnectorMetaInfo
+      },
       fields() {
         if (this.getConnectorMetaInfo) {
           let fields = this.getConnectorMetaInfo.fields
-          if (this.sortations.length > 0) {
-            let sortations = this.sortations
+          if (this.sortingFields.length > 0) {
+            let sortingFields = this.sortingFields
             fields = fields.filter(x => {
-              return sortations.findIndex(t => t.id === x.id) === -1
+              return sortingFields.findIndex(t => t.id === x.id) === -1
             })
           }
           return fields
@@ -269,14 +280,12 @@
         this.sortation = null // Reset the sortation
       },
       addFilter() {
-        this.filters.push(
-          {
-            removable: true, field: null, operator: null, value: null
-          }
-        )
+        this.$store.commit(MUTATE_ADD_FILTER, {
+          removable: true, field: null, operator: null, value: null
+        })
       },
       removeFilter(filter) {
-        this.filters.splice(this.filters.indexOf(filter), 1)
+        this.$store.commit(MUTATE_REMOVE_FILTER, filter)
       },
       execute() {
         this.$store.dispatch(EXECUTE_GET_CONNECTOR, {
@@ -284,7 +293,8 @@
           getConnector: this.selectedGetConnector,
           skip: this.skip,
           take: this.take,
-          sortations: this.sortations
+          sortingFields: this.sortingFields,
+          filters: this.filters
         })
       }
     }

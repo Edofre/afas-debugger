@@ -76,7 +76,7 @@
 </template>
 
 <script>
-  import { LOAD_GET_CONNECTOR_META_INFO, LOAD_GET_CONNECTORS } from '../store/types'
+  import { LOAD_GET_CONNECTOR_META_INFO, LOAD_GET_CONNECTORS, RESET_GET_CONNECTOR_REQUEST_DATA } from '../store/types'
   import Fields from '@/components/GetConnector/Fields.vue'
   import MakeRequest from '@/components/GetConnector/MakeRequest.vue'
 
@@ -122,6 +122,8 @@
           token: JSON.parse(localStorage.getItem('afas_token')),
           getConnector
         })
+
+        this.$store.dispatch(RESET_GET_CONNECTOR_REQUEST_DATA)
       },
       reload() {
         this.selectedGetConnector = null

@@ -30,11 +30,18 @@ export const MUTATE_GET_CONNECTOR_META_INFO = 'get-connectors/MUTATE_GET_CONNECT
 export const MUTATE_LOADING_GET_CONNECTOR_META_INFO = 'get-connectors/MUTATE_LOADING_GET_CONNECTOR_META_INFO'
 export const MUTATE_RESPONSE_GET_CONNECTOR = 'get-connectors/MUTATE_RESPONSE_GET_CONNECTOR'
 export const MUTATE_EXECUTING_GET_CONNECTOR = 'get-connectors/MUTATE_EXECUTING_GET_CONNECTOR'
+export const MUTATE_SKIP = 'get-connectors/MUTATE_SKIP'
+export const MUTATE_TAKE = 'get-connectors/MUTATE_TAKE'
+export const MUTATE_SORTING_FIELDS = 'get-connectors/MUTATE_SORTING_FIELDS'
+export const MUTATE_FILTERS = 'get-connectors/MUTATE_FILTERS'
+export const MUTATE_ADD_FILTER = 'get-connectors/MUTATE_ADD_FILTER'
+export const MUTATE_REMOVE_FILTER = 'get-connectors/MUTATE_REMOVE_FILTER'
 
 // Actions
 export const LOAD_GET_CONNECTORS = 'get-connectors/LOAD_GET_CONNECTORS'
 export const LOAD_GET_CONNECTOR_META_INFO = 'get-connectors/LOAD_GET_CONNECTOR_META_INFO'
 export const EXECUTE_GET_CONNECTOR = 'get-connectors/EXECUTE_GET_CONNECTOR'
+export const RESET_GET_CONNECTOR_REQUEST_DATA = 'get-connectors/RESET_GET_CONNECTOR_REQUEST_DATA'
 
 /*
 |--------------------------------------------------------------------------

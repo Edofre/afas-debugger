@@ -9,7 +9,14 @@ const state = {
   getConnectorMetaInfo: [],
   loadingGetConnectorMetaInfo: false,
   responseGetConnector: null,
-  executingGetConnector: false
+  executingGetConnector: false,
+  // Requests
+  skip: 0,
+  take: 100,
+  sortingFields: [],
+  filters: [
+    { removable: false, field: null, operator: null, value: null }
+  ]
 }
 
 const getters = {
@@ -30,6 +37,18 @@ const getters = {
   },
   executingGetConnector() {
     return state.executingGetConnector
+  },
+  skip() {
+    return state.skip
+  },
+  take() {
+    return state.take
+  },
+  sortingFields() {
+    return state.sortingFields
+  },
+  filters() {
+    return state.filters
   }
 }
 
@@ -51,6 +70,24 @@ const mutations = {
   },
   [types.MUTATE_EXECUTING_GET_CONNECTOR]: (state, executingGetConnector) => {
     state.executingGetConnector = executingGetConnector
+  },
+  [types.MUTATE_SKIP]: (state, skip) => {
+    state.skip = skip
+  },
+  [types.MUTATE_TAKE]: (state, take) => {
+    state.take = take
+  },
+  [types.MUTATE_SORTING_FIELDS]: (state, sortingFields) => {
+    state.sortingFields = sortingFields
+  },
+  [types.MUTATE_FILTERS]: (state, filters) => {
+    state.filters = filters
+  },
+  [types.MUTATE_ADD_FILTER]: (state, filter) => {
+    state.filters.push(filter)
+  },
+  [types.MUTATE_REMOVE_FILTER]: (state, filter) => {
+    state.filters.splice(state.filters.indexOf(filter), 1)
   }
 }
 
@@ -114,7 +151,7 @@ const actions = {
 
     const encodedToken = btoa(token.token)
     const authorizationHeader = `AfasToken ${encodedToken}`
-    const url = createAfasUrl(token, 'connectors/' + getConnector.id + '?skip=' + data.skip + '&take=' + data.take, data.sortations, data.filters)
+    const url = createAfasUrl(token, 'connectors/' + getConnector.id + '?skip=' + data.skip + '&take=' + data.take, data.sortingFields, data.filters)
 
     axios
       .get(url, {
@@ -132,6 +169,13 @@ const actions = {
       .finally(() => {
         commit(types.MUTATE_EXECUTING_GET_CONNECTOR, false)
       })
+  },
+  [types.RESET_GET_CONNECTOR_REQUEST_DATA]: ({ commit }) => {
+    commit(types.MUTATE_SKIP, 0)
+    commit(types.MUTATE_TAKE, 100)
+    commit(types.MUTATE_SORTING_FIELDS, [{ removable: false, field: null, operator: null, value: null }])
+    commit(types.MUTATE_FILTERS, [])
+
   }
 }
 
