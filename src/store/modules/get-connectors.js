@@ -72,7 +72,7 @@ const actions = {
         commit(types.MUTATE_GET_CONNECTORS, res.data.getConnectors)
       })
       .catch(error => {
-        console.log('Cannot retrieve getconnectors because of the following error:')
+        console.log('Cannot retrieve GetConnectors because of the following error:')
         console.log(error)
       })
       .finally(() => {

@@ -284,7 +284,8 @@
           getConnector: this.selectedGetConnector,
           skip: this.skip,
           take: this.take,
-          sortations: this.sortations
+          sortations: this.sortations,
+          filters: this.filters
         })
       }
     }
