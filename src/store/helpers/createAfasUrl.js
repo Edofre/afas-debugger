@@ -9,9 +9,8 @@ export default function createAfasUrl(token, endpoint, sortations = [], filters 
     url = `https://${token.id}.rest${environment}.afas.online/profitrestservices/${endpoint}&orderbyfieldids=${sortationString}`
   }
 
+  // Add the filters if provided
   if (filters.length > 0) {
-    // Check if valid, string will look like this:
-
     let filterFieldIds = []
     let filterValues = []
     let operatorTypes = []
@@ -20,13 +19,15 @@ export default function createAfasUrl(token, endpoint, sortations = [], filters 
       // Make sure we don't add any empty rows in our filter
       if (filter.field && filter.operator && filter.value) {
         filterFieldIds.push(filter.field)
-        filterValues.push(filter.operator)
-        operatorTypes.push(filter.value)
+        filterValues.push(filter.value)
+        operatorTypes.push(filter.operator)
       }
     })
 
     if (filterFieldIds.length > 0) {
-      // elements.join()
+      url += `&filterfieldids=${filterFieldIds.join()}`
+      url += `&filtervalues=${filterValues.join()}`
+      url += `&operatortypes=${operatorTypes.join()}`
     }
 
     // &filterfieldids=id,id
@@ -37,16 +38,7 @@ export default function createAfasUrl(token, endpoint, sortations = [], filters 
     // filterfieldids=id%2Cid&filtervalues=BA%2CBG&operatortypes=1%2C1
     // ; MEANS AND
     // filterfieldids=id%3Bid&filtervalues=BA%3BBG&operatortypes=1%3B1
-
   }
 
   return url
 }
-
-// https://87134.rest.afas.online/ProfitRestServices/connectors/AFASPocket_Activities?orderbyfieldids=-description
-//
-
-
-
-
-
