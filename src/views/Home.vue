@@ -6,7 +6,7 @@
           <app-token v-if="token"></app-token>
           <app-save-token v-else></app-save-token>
           <transition appear name="slide">
-            <app-connection-status></app-connection-status>
+            <app-connection-status v-if="tokenConnection.message"></app-connection-status>
           </transition>
         </div>
       </div>
