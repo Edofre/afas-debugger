@@ -18,11 +18,6 @@
       tokenConnection() {
         return this.$store.getters.tokenConnection
       }
-    },
-    methods: {
-      clearMessage() {
-        // this.$store.dispatch(CLEAR_TOKEN)
-      }
     }
   }
 </script>

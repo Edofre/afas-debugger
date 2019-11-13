@@ -42,7 +42,7 @@ const actions = {
   [types.LOAD_TOKEN]: ({ commit }, token) => {
     commit(types.MUTATE_TOKEN, token)
   },
-  [types.CLEAR_TOKEN]: ({ commit }, token) => {
+  [types.CLEAR_TOKEN]: ({ commit }) => {
     localStorage.removeItem('afas_token')
     commit(types.MUTATE_TOKEN, null)
   },
@@ -77,6 +77,9 @@ const actions = {
       .then(res => {
         commit(types.MUTATE_TOKEN_CONNECTION_SUCCESS, true)
         commit(types.MUTATE_TOKEN_CONNECTION_MESSAGE, 'Successfully connected!')
+
+        // Save token
+        dispatch(types.SAVE_TOKEN, token)
       })
       .catch(error => {
         commit(types.MUTATE_TOKEN_CONNECTION_SUCCESS, false)
