@@ -44,11 +44,6 @@ const actions = {
   },
   [types.CLEAR_TOKEN]: ({ commit }) => {
     localStorage.removeItem('afas_token')
-    commit(types.MUTATE_TOKEN, null)
-  },
-  [types.SAVE_TOKEN]: ({ commit }, token) => {
-    commit(types.MUTATE_TOKEN, token)
-    localStorage.setItem('afas_token', JSON.stringify(token))
 
     // Remove connection details
     commit(types.MUTATE_TOKEN_CONNECTION, {
@@ -56,6 +51,11 @@ const actions = {
       message: null,
       success: false
     })
+    commit(types.MUTATE_TOKEN, null)
+  },
+  [types.SAVE_TOKEN]: ({ commit }, token) => {
+    commit(types.MUTATE_TOKEN, token)
+    localStorage.setItem('afas_token', JSON.stringify(token))
   },
   [types.TEST_CONNECTION]: ({ commit, dispatch }, token) => {
     commit(types.MUTATE_TOKEN_CONNECTION, {

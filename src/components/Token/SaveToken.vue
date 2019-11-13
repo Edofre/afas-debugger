@@ -74,17 +74,6 @@
             Test connection
             <font-awesome-icon v-if="tokenConnection.status === STATUS_LOADING" class="font-awesome-icon" icon="spinner" spin/>
           </button>
-
-          <button
-            v-if="tokenConnection.success"
-            :disabled="$v.$invalid"
-            :class="{'opacity-50 cursor-not-allowed': $v.$invalid, 'hover:bg-afas-red': !$v.$invalid}"
-            @click="save"
-            class="bg-afas-blue text-white px-4 py-2 leading-none rounded focus:outline-none focus:shadow-outline float-right"
-          >
-            <font-awesome-icon class="font-awesome-icon" icon="save"/>
-            Save token
-          </button>
         </div>
       </div>
 
@@ -94,7 +83,7 @@
 
 <script>
   import { minLength, required } from 'vuelidate/lib/validators'
-  import { SAVE_TOKEN, STATUS_LOADING, TEST_CONNECTION } from '../../store/types'
+  import { STATUS_LOADING, TEST_CONNECTION } from '../../store/types'
 
   export default {
     name: 'SaveToken',
@@ -130,15 +119,6 @@
       }
     },
     methods: {
-      save() {
-        const token = {
-          id: this.id,
-          environment: this.environment,
-          token: this.token
-        }
-
-        this.$store.dispatch(SAVE_TOKEN, token)
-      },
       testConnection() {
         const token = {
           id: this.id,
