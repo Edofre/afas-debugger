@@ -57,7 +57,7 @@
           </label>
         </div>
 
-        <div class="md:w-1/5 mt-5 px-5">
+        <div class="md:w-1/5 mt-5 px-3">
           <button
             :disabled="$v.$invalid"
             :class="{'opacity-50 cursor-not-allowed': $v.$invalid, 'hover:bg-afas-red': !$v.$invalid}"
@@ -101,7 +101,7 @@
       </div>
 
       <div v-for="filter in filters" class="flex flex-wrap mb-2">
-        <div class="md:w-1/5 mt-5 px-5">
+        <div class="md:w-1/5 mt-5 px-3">
           <button
             v-if="filter.removable"
             @click="removeFilter(filter)"
