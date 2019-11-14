@@ -101,7 +101,7 @@
       </div>
 
       <div v-for="filter in filters" class="flex flex-wrap mb-2">
-        <div class="md:w-1/5 mt-5 px-3">
+        <div class="md:w-1/6 mt-5 px-3">
           <button
             v-if="filter.removable"
             @click="removeFilter(filter)"
@@ -112,7 +112,19 @@
           </button>
         </div>
 
-        <div class="md:w-1/5 px-3">
+        <div class="md:w-1/6 px-3">
+          <label v-if="filter.removable" class="block uppercase tracking-wide text-xs font-bold">
+            <span class="text-gray-700">Logic</span>
+            <select
+              v-model="filter.logic"
+              class="form-select mt-1 appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-2 px-4 leading-tight focus:outline-none focus:bg-white"
+            >
+              <option v-for="(option, key) in logicOptions" :key="key" :value="key">{{ option }}</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="md:w-1/6 px-3">
           <label class="block uppercase tracking-wide text-xs font-bold">
             <span class="text-gray-700">Field</span>
             <select
@@ -125,7 +137,7 @@
           </label>
         </div>
 
-        <div class="md:w-1/5 px-3">
+        <div class="md:w-1/6 px-3">
           <label class="block uppercase tracking-wide text-xs font-bold">
             <span class="text-gray-700">Operator</span>
             <select
@@ -138,7 +150,7 @@
           </label>
         </div>
 
-        <div class="md:w-1/5 px-3">
+        <div class="md:w-1/6 px-3">
           <label
             class="block uppercase tracking-wide text-gray-700 text-xs font-bold"
           >
@@ -152,7 +164,7 @@
           </label>
         </div>
 
-        <div class="md:w-1/5 mt-5 px-5">
+        <div class="md:w-1/6 mt-5 px-5">
           <button
             @click="addFilter()"
             class="bg-afas-blue hover:bg-afas-red text-white py-3 px-4 leading-none rounded focus:outline-none focus:shadow-outline"
@@ -194,7 +206,7 @@
         sortations: [],
         directions: ['asc', 'desc'],
         filters: [
-          { removable: false, field: null, operator: null, value: null }
+          { logic: 'or', removable: false, field: null, operator: null, value: null }
         ],
         operatorOptions: {
           1: '= (is equal to) [1]',
@@ -212,6 +224,10 @@
           13: '& (ends with) [13]',
           14: '!& (does not ends with) [14]',
           15: 'Sf (quickfilter) [15]'
+        },
+        logicOptions: {
+          'or': 'OR',
+          'and': 'AND'
         }
       }
     },
@@ -271,7 +287,7 @@
       addFilter() {
         this.filters.push(
           {
-            removable: true, field: null, operator: null, value: null
+            logic: 'or', removable: true, field: null, operator: null, value: null
           }
         )
       },
