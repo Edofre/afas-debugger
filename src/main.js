@@ -8,26 +8,22 @@ import Vuelidate from 'vuelidate'
 import axios from 'axios'
 // Styles
 import '@/assets/scss/main.scss'
-import '@/assets/scss/tailwind.scss'
 // Custom
 import './fontawesome.js'
 
-// Axios configuration
+import BootstrapVue from 'bootstrap-vue'
+
+// Axios default configuration
 axios.defaults.headers.get['Content-Type'] = 'application/json'
-// Add AFAS token if we have it
-// axios.interceptors.request.use((config) => {
-//   const token = localStorage.getItem('afas_token')
-//   if (token) {
-//     config.headers.Authorization = 'AfasToken ' + token
-//   }
-//   return config
-// })
 
 // Vuelidate
 Vue.use(Vuelidate)
 
 // Vue CLI
 Vue.config.productionTip = false
+
+// Bootstrap
+Vue.use(BootstrapVue)
 
 new Vue({
   router,

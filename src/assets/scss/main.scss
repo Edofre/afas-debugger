@@ -1,15 +1,7 @@
 // Import our variables
 @import "variables";
-
 // Import transitions
 @import "transitions";
-
-body {
-  // http://www.heropatterns.com, AFAS colors, red & blue
-  background-color: #0c61a9;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%23cc0e3c' fill-opacity='0.4' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
-}
-
-.font-awesome-icon {
-  margin-right: 3px;
-}
+// Bootstrap
+@import 'node_modules/bootstrap/scss/bootstrap';
+@import 'node_modules/bootstrap-vue/src/index.scss';
