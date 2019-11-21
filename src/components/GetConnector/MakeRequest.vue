@@ -1,7 +1,6 @@
 <template>
   <div v-if="selectedGetConnector" class="">
     <form class="w-full" @submit.prevent="execute">
-
       <div class="flex flex-wrap mb-2">
         <div class="md:w-1/5 px-3">
           <label
@@ -71,17 +70,17 @@
       </div>
 
       <div v-if="sortations.length > 0" class="w-full max-w-sm">
-        <div v-for="selectedsortation in sortations" class="md:flex md:items-center mt-2">
+        <div v-for="(selectedSortation, index) in sortations" :key="index" class="md:flex md:items-center mt-2">
           <div class="md:w-1/3">
             <label class="block text-gray-700 font-bold md:text-right mt-4 pr-4" for="inline-full-name">
-              {{ selectedsortation.label }}
+              {{ selectedSortation.label }}
             </label>
           </div>
           <div class="md:w-1/3">
             <label class="block uppercase tracking-wide text-xs font-bold">
               <span class="text-gray-700">Direction</span>
               <select
-                v-model="selectedsortation.direction"
+                v-model="selectedSortation.direction"
                 class="form-select mt-1 appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-2 px-4 leading-tight focus:outline-none focus:bg-white"
               >
                 <option value="asc">Asc</option>
@@ -91,7 +90,7 @@
           </div>
           <div class="md:w-1/3 ml-1 mt-5">
             <button
-              @click="removeSortation(selectedsortation)"
+              @click="removeSortation(selectedSortation)"
               class="bg-afas-red hover:bg-afas-blue text-white py-2 px-4 leading-none rounded focus:outline-none focus:shadow-outline"
             >
               <font-awesome-icon class="font-awesome-icon" icon="trash"/>
@@ -100,7 +99,7 @@
         </div>
       </div>
 
-      <div v-for="filter in filters" class="flex flex-wrap mb-2">
+      <div v-for="(filter, index) in filters" :key="index" class="flex flex-wrap mb-2">
         <div class="md:w-1/6 mt-5 px-3">
           <button
             v-if="filter.removable"
@@ -305,6 +304,5 @@
         })
       }
     }
-
   }
 </script>
