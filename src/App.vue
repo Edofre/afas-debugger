@@ -1,42 +1,38 @@
 <template>
   <div id="app">
-    <nav class="flex items-center justify-between flex-wrap bg-afas-red border-b-2 p-4">
-      <div class="flex items-center flex-no-shrink text-white mr-6">
-        <span class="font-semibold text-xl tracking-tight">AFAS debugger</span>
-      </div>
-      <div class="block sm:hidden">
-        <button @click="toggle" class="flex items-center px-4 py-2 leading-none border rounded hover:text-white hover:border-white">
-          <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title>
-            <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/>
-          </svg>
-        </button>
-      </div>
-      <div :class="open ? 'block': 'hidden'" class="w-full flex-grow sm:flex sm:items-center sm:w-auto">
-        <div class="text-sm sm:flex-grow">
-          <router-link
-            class="no-underline block mt-4 sm:inline-block sm:mt-0 hover:text-white mr-4"
-            to="/">
-            Home
-          </router-link>
+    <nav class="navbar navbar-expand-md py-1 navbar-dark bg-dark fixed-top">
+      <a class="navbar-brand" href="#">AFAS debugger</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbar">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <router-link class="nav-link" to="/">
+              Home
+            </router-link>
+          </li>
           <template v-if="token">
-            <router-link
-              class="no-underline block mt-4 sm:inline-block sm:mt-0 hover:text-white mr-4"
-              to="/get-connectors">
-              GetConnectors
-            </router-link>
-            <router-link
-              class="no-underline block mt-4 sm:inline-block sm:mt-0 hover:text-white mr-4"
-              to="/update-connectors">
-              UpdateConnectors
-            </router-link>
+            <li class="nav-item">
+              <router-link class="nav-link" to="/get-connectors">
+                GetConnectors
+              </router-link>
+            </li>
+            <li class="nav-item">
+              <router-link class="nav-link" to="/update-connectors">
+                UpdateConnectors
+              </router-link>
+            </li>
           </template>
-          <router-link
-            class="no-underline block mt-4 sm:inline-block sm:mt-0 hover:text-white"
-            to="/about">
-            About
-          </router-link>
-        </div>
-        <div v-if="token">
+          <li class="nav-item">
+            <router-link
+              class="nav-link"
+              to="/about">
+              About
+            </router-link>
+          </li>
+        </ul>
+        <div v-if="token" class="form-inline my-2 my-lg-0">
           <app-current-token></app-current-token>
         </div>
       </div>
@@ -58,17 +54,10 @@
   export default {
     name: 'app',
     data() {
-      return {
-        open: false
-      }
+      return {}
     },
     components: {
       'app-current-token': CurrentToken
-    },
-    methods: {
-      toggle() {
-        this.open = !this.open
-      }
     },
     computed: {
       token() {
