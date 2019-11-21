@@ -7,30 +7,20 @@
       </button>
       <div class="collapse navbar-collapse" id="navbar">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <router-link class="nav-link" to="/">
-              Home
-            </router-link>
-          </li>
+          <router-link tag="li" active-class="active" class="nav-item" exact to="/">
+            <a class="nav-link">Home</a>
+          </router-link>
           <template v-if="token">
-            <li class="nav-item">
-              <router-link class="nav-link" to="/get-connectors">
-                GetConnectors
-              </router-link>
-            </li>
-            <li class="nav-item">
-              <router-link class="nav-link" to="/update-connectors">
-                UpdateConnectors
-              </router-link>
-            </li>
-          </template>
-          <li class="nav-item">
-            <router-link
-              class="nav-link"
-              to="/about">
-              About
+            <router-link tag="li" active-class="active" class="nav-item" to="/get-connectors">
+              <a class="nav-link">GetConnectors</a>
             </router-link>
-          </li>
+            <router-link tag="li" active-class="active" class="nav-item" to="/update-connectors">
+              <a class="nav-link">UpdateConnectors</a>
+            </router-link>
+          </template>
+          <router-link tag="li" active-class="active" class="nav-item" to="/about">
+            <a class="nav-link">About</a>
+          </router-link>
         </ul>
         <div v-if="token" class="form-inline my-2 my-lg-0">
           <app-current-token></app-current-token>
