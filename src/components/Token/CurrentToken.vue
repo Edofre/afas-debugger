@@ -1,9 +1,6 @@
 <template>
-  <div class="text-xs font-bold">
-    <label class="uppercase text-white">
-      Current token:
-    </label>
-    {{ token.id }}
+  <div class="text-light">
+    Current token: {{ token.id }}
   </div>
 </template>
 
