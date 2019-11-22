@@ -1,84 +1,76 @@
 <template>
-  <div class="sm:flex sm:items-center px-6 py-6">
-    <form class="w-full" @submit.prevent="testConnection">
-      <div class="flex flex-wrap mb-2">
-        <div class="md:w-1/2 px-3 md:mb-0">
-          <label
-            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-            for="id"
-          >
-            AFAS ID
-          </label>
+  <div>
+    <form @submit.prevent="testConnection">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="id">AFAS ID</label>
           <input
+            type="text"
+            class="form-control"
+            id="id"
+            aria-describedby="idHelp"
             v-model="id"
             :class="{'border-red-500': $v.id.$error, 'border-green-500': !$v.id.$error && $v.id.$dirty}"
             @blur="$v.id.$touch()"
-            class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white"
-            id="id"
-            type="text"
             placeholder="123456"
           >
-        </div>
-        <div class="md:w-1/2 px-3">
-          <label class="block uppercase tracking-wide text-xs font-bold">
-            <span class="text-gray-700">Environment</span>
-            <select
-              v-model="environment"
-              :class="{'border-red-500': $v.environment.$error, 'border-green-500': !$v.environment.$error}"
-              @blur="$v.environment.$touch()"
-              class="form-select mt-2 appearance-none block w-full bg-gray-200 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white"
-            >
-              <option v-for="envOption in envOptions" :key="envOption.id" :value="envOption.id">{{ envOption.name }}</option>
-            </select>
-          </label>
-        </div>
-
-        <div v-if="$v.id.$error" class="w-full px-3">
-          <p class="text-red-500 text-xs italic">We need your AFAS ID to determine what URL we can send requests to.</p>
+          <small id="idHelp" class="form-text text-muted">Your AFAS environment ID</small>
         </div>
       </div>
-
-      <div class="flex flex-wrap mt-3">
-        <div class="w-full px-3 md:mb-0">
-          <label
-            class="block resize-y uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-            for="token"
-          >
-            Token
-          </label>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="token">Token</label>
           <textarea
+            class="form-control"
+            id="token"
+            aria-describedby="tokenHelp"
             v-model="token"
             :class="{'border-red-500': $v.token.$error, 'border-green-500': !$v.token.$error && $v.token.$dirty}"
             @blur="$v.token.$touch()"
-            class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white"
-            rows="4"
-            id="token"
-            placeholder="Your AFAS token"
+            placeholder="123456"
           ></textarea>
-        </div>
-
-        <div v-if="$v.token.$error" class="w-full px-3">
-          <p class="text-red-500 text-xs italic">Please enter your token.</p>
+          <small id="tokenHelp" class="form-text text-muted">Copy paste your token here</small>
         </div>
       </div>
 
-      <div class="flex flex-wrap mt-3">
-        <div class="w-full px-3 md:mb-0">
-          <button
-            :disabled="$v.$invalid"
-            :class="{'opacity-50 cursor-not-allowed': $v.$invalid, 'hover:bg-afas-red': !$v.$invalid}"
-            type="submit"
-            class="bg-afas-blue text-white px-4 py-2 leading-none rounded focus:outline-none focus:shadow-outline"
-          >
-            <font-awesome-icon class="font-awesome-icon" icon="plug"/>
-            Test connection
-            <font-awesome-icon v-if="tokenConnection.status === STATUS_LOADING" class="font-awesome-icon" icon="spinner" spin/>
-          </button>
-        </div>
-      </div>
-
+      <button
+        :disabled="$v.$invalid"
+        :class="{'opacity-50 cursor-not-allowed': $v.$invalid}"
+        type="submit"
+        class="btn btn-primary"
+      >
+        <font-awesome-icon class="font-awesome-icon" icon="plug"/>
+        Test connection
+        <font-awesome-icon v-if="tokenConnection.status === STATUS_LOADING" class="font-awesome-icon" icon="spinner" spin/>
+      </button>
     </form>
   </div>
+
+  <!--  <div class="sm:flex sm:items-center px-6 py-6">-->
+  <!--    <form class="w-full">-->
+  <!--      <div class="flex flex-wrap mb-2">-->
+  <!--        <div class="md:w-1/2 px-3 md:mb-0">-->
+  <!--          <div class="md:w-1/2 px-3">-->
+  <!--            <label class="block uppercase tracking-wide text-xs font-bold">-->
+  <!--              <span class="text-gray-700">Environment</span>-->
+  <!--              <select-->
+  <!--                v-model="environment"-->
+  <!--                :class="{'border-red-500': $v.environment.$error, 'border-green-500': !$v.environment.$error}"-->
+  <!--                @blur="$v.environment.$touch()"-->
+  <!--                class="form-select mt-2 appearance-none block w-full bg-gray-200 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white"-->
+  <!--              >-->
+  <!--                <option v-for="envOption in envOptions" :key="envOption.id" :value="envOption.id">{{ envOption.name }}</option>-->
+  <!--              </select>-->
+  <!--            </label>-->
+  <!--          </div>-->
+
+  <!--          <div v-if="$v.id.$error" class="w-full px-3">-->
+  <!--            <p class="text-red-500 text-xs italic">We need your AFAS ID to determine what URL we can send requests to.</p>-->
+  <!--          </div>-->
+  <!--        </div>-->
+
+  <!--    </form>-->
+  <!--  </div>-->
 </template>
 
 <script>
